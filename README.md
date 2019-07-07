@@ -113,7 +113,7 @@ regtest wallets use the /Qtum/regtest or \Qtum\regtest data directory, have defa
 
 
 
-Testnet Troubleshooting
+# Testnet Troubleshooting
 
 1. If your new or updated wallet is having trouble making peer connections for Testnet, try the "addnode" command with the peers below. The correct response is "null" for qtum-qt or nothing for qtumd, and then the wallet will try for the next few minutes to make the peer connection. Enter one or more of these commands:
 
