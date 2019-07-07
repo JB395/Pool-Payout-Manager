@@ -10,6 +10,7 @@ The Qtum Core wallet application can be set to run on Testnet with the command l
 # Testnet Explorer
 
 Explorer https://testnet.qtum.info/
+
 Older Explorer https://testnet.qtum.org/
 
 
