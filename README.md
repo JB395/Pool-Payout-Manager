@@ -1,9 +1,7 @@
 # Various-Documentation
 Work in progress documentation
 
-Testnet Rewrite 7-3-2019
-
-For https://github.com/qtumproject/documents/blob/master/en/Testnet-User-Guide.md
+# Qtum Testnet
 
 Qtum Testnet offers a public blockchain for testing and development. Free QTUM Testnet coins are available from a faucet and users can test transactions, staking, smart contract creation and operations, QRC20 transactions, etc. Testnet is a separate blockchain from Mainnet. It has different blocks, different transactions, and different coins, but the operation, protocols and specifications are identical to Mainnet (unless new features are being introduced on Testnet).
 
