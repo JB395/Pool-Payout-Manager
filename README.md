@@ -7,27 +7,27 @@ Qtum Testnet offers a public blockchain for testing and development. Free QTUM T
 
 The Qtum Core wallet application can be set to run on Testnet with the command line parameter "-testnet" on startup. A Testnet wallet works identically to a Mainnet wallet except it will use the \Qtum\testnet3 data directory and default port 13888. An additional test mode "regtest" is described below.
 
-Testnet Explorer
+# Testnet Explorer
 
 Explorer https://testnet.qtum.info/
 Older Explorer https://testnet.qtum.org/
 
 
-Testnet Faucet
+# Testnet Faucet
 
 Get free Testnet QTUM, once every 24 hours http://testnet-faucet.qtum.info
 
  
 Qtum Testnet Faucet
 
-Testnet on the Qtum Web Wallet
+# Testnet on the Qtum Web Wallet
 
 Select Settings – Network – Testnet https://qtumwallet.org/
 
 Select the network (Testnet or Mainnet) before restoring from a key file and entering the password.
 
 
-Testnet on the Qtum Core wallet
+# Testnet on the Qtum Core wallet
 
 1. Download and install the Qtum Core wallet for Mac, Linux or Windows from https://qtumeco.io/wallet or for all versions from https://github.com/qtumproject/qtum/releases. See the user documentation for wallets at https://docs.qtum.site/
 
@@ -36,11 +36,14 @@ Testnet on the Qtum Core wallet
 You can launch the wallet on Testnet by using the "-testnet" command line parameter on startup.
 
 The Qtum Testnet data directories are:
+
 •	On macOS/OS X: ~/Library/Application Support/Qtum/testnet3
+
 •	On Linux: ~/.qtum/testnet3
+
 •	On Windows: %APPDATA%\Qtum\testnet3
 
-macOS
+## macOS
 
 Using Apple macOS, to launch the qtum-qt GUI wallet on Testnet use Terminal and change directory to the Qtum app and launch the wallet with the --testnet parameter, using these commands:
 
@@ -51,7 +54,7 @@ cd /Applications/Qtum-Qt.app/Contents/MacOS
 ./Qtum-Qt --testnet
 
 
-Linux
+## Linux
 
 Using Linux, launch the wallet with "./qtumd -testnet" from the bin directory. The command from the home directory is
 ~/qtum/qtum-0.17.6/bin/./qtum-qt -testnet
@@ -70,7 +73,7 @@ For qtumd use the Command Line Interface (CLI) qtum-cli to give commands, and fo
 ./qtum-cli -testnet getblockchaininfo
 
 
-Windows
+## Windows
 
 The Qtum Windows installation includes Startup shortcuts for Mainnet and Testnet (which invokes the "-testnet" parameter). To launch Testnet on windows for the qtum-qt GUI wallet, click the Testnet app on the Start menu:
 
@@ -93,7 +96,7 @@ Another way to launch the Core wallet on Testnet is to include "testnet=1" in th
  
 (here the configuration file is renamed "qtum.conf.txt" for editing and renamed "qtum.conf" after)
 
-regtest
+# regtest
 
 Regression Test (regtest) is another test blockchain that runs as local blockchain. regtest can be run in a Docker container (https://github.com/qtumproject/documents/blob/master/en/Launch-Qtum-with-Docker.md). To run the Core wallet for regtest on a desktop or server, use the "-regtest" parameter to launch as shown in the examples above.
 
