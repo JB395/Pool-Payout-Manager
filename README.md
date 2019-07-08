@@ -13,6 +13,7 @@ Explorer https://testnet.qtum.info/
 
 Older Explorer https://testnet.qtum.org/
 
+![Testnet Faucet](https://github.com/JB395/Various-Documentation/blob/master/12.%20Addnode.jpg)
 
 # Testnet Faucet
 
