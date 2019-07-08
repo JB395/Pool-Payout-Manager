@@ -35,9 +35,9 @@ You can launch the wallet on Testnet by using the "`-testnet`" command line para
 
 The Qtum Testnet data directories are:
 
-•	On macOS/OS X: ~/Library/Application Support/Qtum/testnet3
-•	On Linux: ~/.qtum/testnet3
-•	On Windows: %APPDATA%\Qtum\testnet3
+* On macOS/OS X: ~/Library/Application Support/Qtum/testnet3
+* On Linux: ~/.qtum/testnet3
+* On Windows: %APPDATA%\Qtum\testnet3
 
 ## macOS
 
