@@ -1,4 +1,3 @@
-# Various-Documentation
 Work in progress documentation
 
 # Qtum Testnet
@@ -13,15 +12,12 @@ Explorer https://testnet.qtum.info/
 
 Older Explorer https://testnet.qtum.org/
 
-![Testnet Faucet](https://github.com/JB395/Various-Documentation/blob/master/12.%20Addnode.jpg)
-
 # Testnet Faucet
 
 Get free Testnet QTUM, once every 24 hours http://testnet-faucet.qtum.info
 
-![Testnet Faucet](url)
- 
-Qtum Testnet Faucet
+![1 QtumTestnetFaucet](https://user-images.githubusercontent.com/29760787/60820451-718cb780-a16f-11e9-99be-989ca3388f71.jpg)
+ Qtum Testnet Faucet
 
 # Testnet on the Qtum Web Wallet
 
@@ -29,8 +25,7 @@ Select Settings – Network – Testnet https://qtumwallet.org/
 
 Select the network (Testnet or Mainnet) before restoring from a key file and entering the password.
 
-
-# Testnet on the Qtum Core wallet
+## Testnet on the Qtum Core wallet
 
 1. Download and install the Qtum Core wallet for Mac, Linux or Windows from https://qtumeco.io/wallet or for all versions from https://github.com/qtumproject/qtum/releases. See the user documentation for wallets at https://docs.qtum.site/
 
@@ -41,21 +36,20 @@ You can launch the wallet on Testnet by using the "-testnet" command line parame
 The Qtum Testnet data directories are:
 
 •	On macOS/OS X: ~/Library/Application Support/Qtum/testnet3
-
 •	On Linux: ~/.qtum/testnet3
-
 •	On Windows: %APPDATA%\Qtum\testnet3
 
 ## macOS
 
 Using Apple macOS, to launch the qtum-qt GUI wallet on Testnet use Terminal and change directory to the Qtum app and launch the wallet with the --testnet parameter, using these commands:
 
+```
 cd /Applications/Qtum-Qt.app/Contents/MacOS
 ./Qtum-Qt --testnet
+```
 
- 
+![2 MacQtum-Qt--testnet](https://user-images.githubusercontent.com/29760787/60820453-718cb780-a16f-11e9-849c-449b960ce151.jpg) 
 ./Qtum-Qt --testnet
-
 
 ## Linux
 
