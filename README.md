@@ -42,7 +42,7 @@ Select the compiler button on the left side.
  
 ![8  Compiler](https://user-images.githubusercontent.com/29760787/83368393-a062dc00-a386-11ea-8ae2-6c236a4cd288.jpg)
 
-You can leave the Solidity version set for 0.4.26. At the top, click the tab for QRC20Token.sol to select that file to compile, and click the blue Compile QRC20Token.sol button.
+You can leave the Solidity version set for 0.4.26. At the top, click the tab for QRC20Token.sol to select that file to compile, and click the blue **Compile QRC20Token.sol** button.
 
 ![9  Run Compiler](https://user-images.githubusercontent.com/29760787/83368395-a35dcc80-a386-11ea-9b16-762ff3d31439.jpg)
 
@@ -60,7 +60,7 @@ On the wallet, go to **Smart Contracts** - **Create** and paste the copied objec
 
 ![12  Paste in Bytecode](https://user-images.githubusercontent.com/29760787/83368410-af498e80-a386-11ea-9cfc-ae5908f393ff.jpg)
 
-At the bottom of the create form click the drop down on Sender Address and select qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky. This sets the address to be used by the contract. Leave the gas set at 25000000 and price set at 0.0000040 unless you know how to change this. Click the **Create Contract** button and **Yes** to send the transaction. 
+At the bottom of the Create Contract form click the drop down on Sender Address and select qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky. This sets the address to be used by the contract. Leave the gas set at 25000000 and price set at 0.0000040 unless you know how to change this. Click the **Create Contract** button and **Yes** to send the transaction. 
 
 ![13  Select Address](https://user-images.githubusercontent.com/29760787/83368414-b2447f00-a386-11ea-8d0f-5928865e835e.jpg)
 
@@ -68,10 +68,37 @@ The wallet will confirm the transaction with a Results form. Copy the Contract A
 
 ![14  Results](https://user-images.githubusercontent.com/29760787/83368416-b4a6d900-a386-11ea-8e44-9c773aa94fa0.jpg)
 
-You can also see the contract create transaction on [testnet.qtum.info](https://testnet.qtum.info/tx/0db7a5f38c1959d473405165bf842dcf726c9b79615b0b294514cb44e53fb801)
+The wallet Transaction page will show the transactions so far. First, the wallet received 90.0 QTUM sent from the Testnet faucet. Next, the contract create transation sent the contract bytecode and fees of 1.01414 QTUM. Finally, the wallet received a gas refund of 0.623456 QTUM. Gas refunds are sent in the coinstake transaction, so they shown as "mined" on the blockchain, and must mature for 500 blocks before they can be uses.
 
 ![15  Transactions](https://user-images.githubusercontent.com/29760787/83368419-b7093300-a386-11ea-8508-86a14c7737ca.jpg)
 
+You can also see the contract create transaction on [testnet.qtum.info](https://testnet.qtum.info/tx/0db7a5f38c1959d473405165bf842dcf726c9b79615b0b294514cb44e53fb801)
+
+![16  Explorer](https://user-images.githubusercontent.com/29760787/83368426-bc667d80-a386-11ea-8039-6e3bc2f519f0.jpg)
+
+
+
+![17  Add Token](https://user-images.githubusercontent.com/29760787/83368428-bf616e00-a386-11ea-8a72-ba2a19c21959.jpg)
+
+
+
+![18  Paste Contract Address](https://user-images.githubusercontent.com/29760787/83368432-c1c3c800-a386-11ea-9b7b-5b4224934683.jpg)
+
+
+
+![19  Send QRC20 Tokens](https://user-images.githubusercontent.com/29760787/83368435-c4beb880-a386-11ea-9ebe-277f20e0b6ab.jpg)
+
+
+
+![20  Enable Log Events](https://user-images.githubusercontent.com/29760787/83368436-c7b9a900-a386-11ea-96f6-690abe10bfef.jpg)
+
+
+
+![21  Log Events](https://user-images.githubusercontent.com/29760787/83368438-c9836c80-a386-11ea-9c0b-f27ef946be7c.jpg)
+
+
+
+![22  Restarting Rebuild Database](https://user-images.githubusercontent.com/29760787/83368451-d607c500-a386-11ea-9caa-cb855bb3e07d.jpg)
 
 
 
