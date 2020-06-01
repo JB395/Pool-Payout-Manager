@@ -74,11 +74,9 @@ The wallet Transaction page will show the transactions so far. First, the wallet
 
 You can also see the contract create transaction on [testnet.qtum.info](https://testnet.qtum.info/tx/0db7a5f38c1959d473405165bf842dcf726c9b79615b0b294514cb44e53fb801)
 
-XXXXX math.
-
 ![16  Explorer](https://user-images.githubusercontent.com/29760787/83368426-bc667d80-a386-11ea-8039-6e3bc2f519f0.jpg)
 
-XXXXX some commentary about gas used. 
+The transaction was sent with 2,500,000 gas at price of 0.00000040 QTUM. The contract creation used 941,360 gas giving a gas refund of 2,500,000 - 941,360 = 1,558,640 at price of 0.00000040 or 0.623456 QTUM for the refund. 
 
 # Adding Tokens
 
