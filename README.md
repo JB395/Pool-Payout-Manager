@@ -68,23 +68,27 @@ The wallet will confirm the transaction with a Results form. Copy the Contract A
 
 ![14  Results](https://user-images.githubusercontent.com/29760787/83368416-b4a6d900-a386-11ea-8e44-9c773aa94fa0.jpg)
 
-The wallet Transaction page will show the transactions so far. First, the wallet received 90.0 QTUM sent from the Testnet faucet. Next, the contract create transation sent the contract bytecode and fees of 1.01414 QTUM. Finally, the wallet received a gas refund of 0.623456 QTUM. Gas refunds are sent in the coinstake transaction, so they shown as "mined" on the blockchain, and must mature for 500 blocks before they can be uses.
+The wallet Transaction page will show the transactions so far. First, the wallet received 90.0 QTUM sent from the Testnet faucet. Next, the contract create transation sent the contract bytecode and fees of 1.01414 QTUM. Finally, the wallet received a gas refund of 0.623456 QTUM. Gas refunds are sent in the coinstake transaction, so they shown as "mined" on the blockchain, and must mature for 500 blocks before they can be uses. 
 
 ![15  Transactions](https://user-images.githubusercontent.com/29760787/83368419-b7093300-a386-11ea-8508-86a14c7737ca.jpg)
 
 You can also see the contract create transaction on [testnet.qtum.info](https://testnet.qtum.info/tx/0db7a5f38c1959d473405165bf842dcf726c9b79615b0b294514cb44e53fb801)
 
+XXXXX math.
+
 ![16  Explorer](https://user-images.githubusercontent.com/29760787/83368426-bc667d80-a386-11ea-8039-6e3bc2f519f0.jpg)
 
-
+To see the new token in the wallet select **QRC Tokens** and the "**+**" button to the right of the Add new token.
 
 ![17  Add Token](https://user-images.githubusercontent.com/29760787/83368428-bf616e00-a386-11ea-8a72-ba2a19c21959.jpg)
 
-
+Paste the contract address 137d046beb3cb66c0cdd389bf8bab4faeae16c0b into the Contract address field, and rest of the form will be filled in. At the bottom of the form click the drop down arrow to the right of the Token address field and select qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky and **Confirm**. Could be multiples, XXXXX
 
 ![18  Paste Contract Address](https://user-images.githubusercontent.com/29760787/83368432-c1c3c800-a386-11ea-9b7b-5b4224934683.jpg)
 
+You will see the Log events prompt "Enable log events from the option menu in order to receive token transactions" We will do this as the last step.
 
+To send QRC20 tokens, select **QRC20 Tokens** and **Send** (could be multiples). Fill in the "Pay to" and "Amount". The "Description" field is optional. Click **Send** and **Yes** to complete the transaction.
 
 ![19  Send QRC20 Tokens](https://user-images.githubusercontent.com/29760787/83368435-c4beb880-a386-11ea-9ebe-277f20e0b6ab.jpg)
 
