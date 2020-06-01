@@ -98,7 +98,7 @@ You will see the Log events prompt "Enable log events from the option menu to re
 
 ![21  Log Events](https://user-images.githubusercontent.com/29760787/83368438-c9836c80-a386-11ea-9c0b-f27ef946be7c.jpg)
 
-# Send Tokens
+# Sending Tokens
 
 To send QRC20 tokens, select **QRC20 Tokens** and **Send**. Note there is single row listing for the QT527 token tied to address qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky here, but tokens could be tied to different addresses of this wallet, in which case they would be listed individually and need to be sent individually.
 
