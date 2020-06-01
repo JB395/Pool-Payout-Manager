@@ -1,16 +1,13 @@
 Work in progress documentation
 
-# Qtum Testnet
+# Implementation
 
-Qtum Testnet offers a public blockchain for testing and development. Free QTUM Testnet coins are available from a faucet and users can test transactions, staking, smart contract creation and operations, QRC20 transactions, etc. Testnet is a separate blockchain from Mainnet. It has different blocks, different transactions, and different coins, but the operation, protocols and specifications are identical to Mainnet (unless new features are being introduced on Testnet).
+You can use [QRC20TOken](https://github.com/qtumproject/QRC20Token) code to create your own QRC20 token on Qtum. For this example, we will use Qtum testnet.
 
-The Qtum Core wallet application can be set to run on Testnet with the command line parameter "`-testnet`" on startup. A Testnet wallet works identically to a Mainnet wallet except it will use the \Qtum\testnet3 data directory and default port 13888. An additional test mode "regtest" is described below.
 
-# Testnet Explorer
 
-Explorer https://testnet.qtum.info/
 
-Older Explorer https://testnet.qtum.org/
+
 
 # Testnet Faucet
 
