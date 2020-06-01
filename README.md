@@ -78,6 +78,8 @@ XXXXX math.
 
 ![16  Explorer](https://user-images.githubusercontent.com/29760787/83368426-bc667d80-a386-11ea-8039-6e3bc2f519f0.jpg)
 
+# Adding Tokens
+
 To see the new token in the wallet select **QRC Tokens** and the "**+**" button to the right of the Add new token.
 
 ![17  Add Token](https://user-images.githubusercontent.com/29760787/83368428-bf616e00-a386-11ea-8a72-ba2a19c21959.jpg)
@@ -88,23 +90,27 @@ Paste the contract address 137d046beb3cb66c0cdd389bf8bab4faeae16c0b into the Con
 
 You will see the Log events prompt "Enable log events from the option menu in order to receive token transactions" We will do this as the last step.
 
+# Send Tokens
+
 To send QRC20 tokens, select **QRC20 Tokens** and **Send**. Note there is single listing for the QT527 token tied to address qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky here, but tokens could be tied to different addresses of this wallet, in which case they would be listed individually and sent individually.
 
 Fill in the fields for "PayTo" and "Amount". The "Description" field is optional. Click **Send** and **Yes** to complete the transaction.
 
-Wallet **Transactions** will now show the contract send transaction. Right-click on teh transaction to see the details including the transaction ID.
-
 ![19  Send QRC20 Tokens](https://user-images.githubusercontent.com/29760787/83368435-c4beb880-a386-11ea-9ebe-277f20e0b6ab.jpg)
 
+Wallet **Transactions** will now show the contract send transaction. Right-click on teh transaction to see the details including the transaction ID.
+
+# Enable Log Events
+
 We can follow up now on the previous prompt to enable log events. In order for the wallet to fully display token transactions it needs to have log event enabled. Select **Settings** - **Options** and click on **Enable log events**. You must restart the wallet and rescan. The prompt will show "Client restart required to activate changes." Select **OK** then **Yes**. The wallet will exit, then restart the wallet. 
+
 ![20  Enable Log Events](https://user-images.githubusercontent.com/29760787/83368436-c7b9a900-a386-11ea-96f6-690abe10bfef.jpg)
 
-WHen the wallet restarts, click **OK** to rebuild the block database. The wallet status will show "Reindexing blocks on disk..." and "Syncing headers" for several minutes or several tens of minutes, depending on your computer. 
-
+WHen the wallet restarts, click **OK** to rebuild the block database. 
 
 ![21  Log Events](https://user-images.githubusercontent.com/29760787/83368438-c9836c80-a386-11ea-9c0b-f27ef946be7c.jpg)
 
-
+The wallet status will show "Reindexing blocks on disk..." and "Syncing headers" for several minutes or several tens of minutes, depending on your computer. 
 
 ![22  Restarting Rebuild Database](https://user-images.githubusercontent.com/29760787/83368451-d607c500-a386-11ea-9caa-cb855bb3e07d.jpg)
 
