@@ -12,13 +12,13 @@ We need some QTUM to pay for the smart contract gas and transaction fees, and ca
 
 ![2  Testnet Faucet](https://user-images.githubusercontent.com/29760787/83368347-7a3d3c00-a386-11ea-940e-5ba4c83b32b8.jpg)
 
-Next, copy the token code at [QRC20Token](https://github.com/qtumproject/QRC20Token). In the QRC20Token.sol file you can change `name`, `symbol`, and `totalSupply` to your preference. For this example we will edit later to name the token "QRC TEST 527", the symbol "QT527" and have a total supply of 1,000,000,000 which is entered as "10 * * 9". We will leave `decimals` set for 8, to give 8 decimal places for each token, so for example, you sould send a 1.12345678 token amount. 
+Next, copy the token code at [QRC20Token](https://github.com/qtumproject/QRC20Token). In the QRC20Token.sol file you can change `name`, `symbol`, and `totalSupply` to your preference. For this example, we will edit later to name the token "QRC TEST 527", the symbol "QT527" and have a total supply of 1,000,000,000 which is entered as "10 * * 9". We will leave `decimals` set for 8, to give 8 decimal places for each token, so for example, you should send a 1.12345678 token amount. 
 
 ![3  Solidity](https://user-images.githubusercontent.com/29760787/83368355-7dd0c300-a386-11ea-820c-2ce2788e5777.jpg)
 
 After editing the Solidity file, save it locally or just copy to paste into Remix.
 
-Next we will use Remix to compile the Solidity code into bytecode. In a browser, go to Remix at http://remix.ethereum.org/ and select the SOLIDITY Environment.
+Next, we will use Remix to compile the Solidity code into bytecode. In a browser, go to Remix at http://remix.ethereum.org/ and select the SOLIDITY Environment.
 
 ![4  Select Solidity](https://user-images.githubusercontent.com/29760787/83368369-8d500c00-a386-11ea-9c80-98243d69bcd8.jpg)
 
@@ -68,7 +68,7 @@ The wallet will confirm the transaction on the "Result 1" tab. Copy the Contract
 
 ![14  Results](https://user-images.githubusercontent.com/29760787/83368416-b4a6d900-a386-11ea-8e44-9c773aa94fa0.jpg)
 
-The wallet Transaction page will show the transactions so far. First, the wallet received 90.0 QTUM sent from the Testnet faucet. Next, the contract create transation sent the contract bytecode and fees of 1.01414 QTUM. Finally, the wallet received a gas refund of 0.623456 QTUM. Gas refunds are sent in the coinstake transaction, so they shown as "mined" on the blockchain, and must mature for 500 blocks before they can be used. 
+The wallet Transaction page will show the transactions so far. First, the wallet received 90.0 QTUM sent from the Testnet faucet. Next, the contract create transaction sent the contract bytecode and fees of 1.01414 QTUM. Finally, the wallet received a gas refund of 0.623456 QTUM. Gas refunds are sent in the coinstake transaction, so they show as "mined" in the wallet, and must mature for 500 blocks before they can be used. 
 
 ![15  Transactions](https://user-images.githubusercontent.com/29760787/83368419-b7093300-a386-11ea-8508-86a14c7737ca.jpg)
 
@@ -82,11 +82,11 @@ XXXXX some commentary about gas used.
 
 # Adding Tokens
 
-Smart contract transactions are sent to the smart contract address, not the wallet address, and for the wallet to see or make smart contract transactions we must inform the wallet, in this case by "adding" the token. To see the new token in the wallet select **QRC Tokens** and the "**+**" button to the right of the Add new token.
+Smart contract transactions are sent to the smart contract address, not the wallet address, and for the wallet to see or make smart contract transactions we must inform the wallet, in this case by "adding" the token. To see the new token in the wallet, select **QRC Tokens** and the "**+**" button to the right of the Add new token.
 
 ![17  Add Token](https://user-images.githubusercontent.com/29760787/83368428-bf616e00-a386-11ea-8a72-ba2a19c21959.jpg)
 
-Paste the contract address 137d046beb3cb66c0cdd389bf8bab4faeae16c0b into the "Contract Address" field, and rest of the form will be autofilled. At the bottom of the form click the drop down arrow to the right of the Token address field and select qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky and **Confirm**. If the wallet is using multiple addresses, chose the correct Qtum address that was used to create the token.
+Paste the contract address 137d046beb3cb66c0cdd389bf8bab4faeae16c0b into the "Contract Address" field, and rest of the form will be autofilled. At the bottom of the form click the drop-down arrow to the right of the Token address field and select qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky and **Confirm**. If the wallet is using multiple addresses, chose the correct Qtum address that was used to create the token.
 
 ![18  Paste Contract Address](https://user-images.githubusercontent.com/29760787/83368432-c1c3c800-a386-11ea-9b7b-5b4224934683.jpg)
 
@@ -102,7 +102,7 @@ Fill in the fields for "PayTo" and "Amount". The "Description" field is optional
 
 ![19  Send QRC20 Tokens](https://user-images.githubusercontent.com/29760787/83368435-c4beb880-a386-11ea-9ebe-277f20e0b6ab.jpg)
 
-Wallet **Transactions** will now show the contract send transaction. Right-click on teh transaction to see the details including the transaction ID.
+Wallet **Transactions** will now show the contract send transaction. Right-click on the transaction to see the details including the transaction ID.
 
 # Enable Log Events
 
