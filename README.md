@@ -122,15 +122,9 @@ QRC20 token balances are managed by the smart contract for individual Qtum addre
 
 Continuing the example above, we sent 500 QT527 tokens to the wallet on a new receiving address qRdxBZSvUx1edUfygyHr35mVgmX9pAMLrZ. To show this new transaction of QT527 tokens in the wallet we must complete the Add Token step for this new address.
 
-(image)
+![23  Add 2nd Token](https://user-images.githubusercontent.com/29760787/83447393-5cbbb100-a41e-11ea-889e-8675e626341e.jpg)
 
-Now if we look to send QRC20 tokens we can see the balance for each tied address
-
-XXXXXX on tied address qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky
-XXXXX on tied address qRdxBZSvUx1edUfygyHr35mVgmX9pAMLrZ
-
-The tokens must be selected and sent separately from each tied address.
-
+Now the tokens can be used for send and receive operations for each of these tied addresses.
 
 
 
