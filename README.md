@@ -124,8 +124,9 @@ Continuing the example above, we sent 500 QT527 tokens to the wallet on a new re
 
 ![23  Add 2nd Token](https://user-images.githubusercontent.com/29760787/83447393-5cbbb100-a41e-11ea-889e-8675e626341e.jpg)
 
-Now the tokens can be used for send and receive operations for each of these tied addresses.
+Now the tokens for each tied address are shown separately and each row can be used separately for send and receive operations.
 
+![24  Two QRC20 Tokens Listed](https://user-images.githubusercontent.com/29760787/83448628-3bf45b00-a420-11ea-8288-795e482c381a.jpg)
 
 
 
