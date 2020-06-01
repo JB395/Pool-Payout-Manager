@@ -64,7 +64,7 @@ At the bottom of the Create Contract form click the drop down on Sender Address 
 
 ![13  Select Address](https://user-images.githubusercontent.com/29760787/83368414-b2447f00-a386-11ea-8d0f-5928865e835e.jpg)
 
-The wallet will confirm the transaction with a Results form. Copy the Contract Address 137d046beb3cb66c0cdd389bf8bab4faeae16c0b.
+The wallet will confirm the transaction on the "Result 1" form. Copy the Contract Address 137d046beb3cb66c0cdd389bf8bab4faeae16c0b.
 
 ![14  Results](https://user-images.githubusercontent.com/29760787/83368416-b4a6d900-a386-11ea-8e44-9c773aa94fa0.jpg)
 
