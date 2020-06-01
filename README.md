@@ -1,6 +1,10 @@
 Work in progress documentation
 
-[Creating QRC20 Tokens](
+* [Creating QRC20 Tokens](https://github.com/JB395/Various-Documentation/blob/master/README.md#creating-qrc20-tokens)
+* [Adding Tokens](https://github.com/JB395/Various-Documentation/blob/master/README.md#adding-tokens)
+* [Send Tokens](https://github.com/JB395/Various-Documentation/blob/master/README.md#send-tokens)
+* [Enable Log Events](https://github.com/JB395/Various-Documentation/blob/master/README.md#enable-log-events)
+* [Multiple Tokens in Wallet](https://github.com/JB395/Various-Documentation/blob/master/README.md#multiple-tokens-in-wallet)
 
 # Creating QRC20 Tokens
 
