@@ -120,20 +120,17 @@ The wallet status will show "Reindexing blocks on disk..." and "Syncing headers"
 
 QRC20 token balances are managed by the smart contract for individual Qtum addresses, even if these Qtum addresses are for the same wallet.
 
-Continuing the example above, we sent 500 QT527 tokens to the wallet on a new receiving address XXXXX. To show this new transaction of QT527 tokens in teh wallet we must complete the Add Token step for this new address.
+Continuing the example above, we sent 500 QT527 tokens to the wallet on a new receiving address qRdxBZSvUx1edUfygyHr35mVgmX9pAMLrZ. To show this new transaction of QT527 tokens in the wallet we must complete the Add Token step for this new address.
 
 (image)
 
 Now if we look to send QRC20 tokens we can see the balance for each tied address
 
-XXXXXX on tied address XXXXXX
-XXXXX on tied address XXXXXX
+XXXXXX on tied address qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky
+XXXXX on tied address qRdxBZSvUx1edUfygyHr35mVgmX9pAMLrZ
 
-However, recall that to traansfer tokens (send them) we must have QTUM in the tied address to pay gas and fees. In this example, address XXXXX holds XXXXX QTUM and address XXXXXX holds 0.0 QTUM. Attempting to send QT527 from tied address will give the error message XXXXX.
+The tokens must be selected and sent separately from each tied address.
 
-(image)
-
-The solution is simply to send a few QTUM to address XXXXX, and then sending tokens tied to that addres will have no problem.
 
 
 
