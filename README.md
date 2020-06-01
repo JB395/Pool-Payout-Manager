@@ -8,7 +8,7 @@ After installing the Qtum Core wallet from https://qtumeco.io/wallet or https://
 
 ![1  Copy Receiving Address](https://user-images.githubusercontent.com/29760787/83368341-727d9780-a386-11ea-973d-5f8b13767802.jpg)
 
-We need some QTUM to pay for the smart contract gas and transaction fees, and can get some testnet QTUM from the [Qtum Testnet Faucet](http://testnet-faucet.qtum.info/). Paste the receiving address into the faucet address field and press the blue checkmark button.
+We need some QTUM to pay for the smart contract gas and transaction fees and can get some testnet QTUM from the [Qtum Testnet Faucet](http://testnet-faucet.qtum.info/). Paste the receiving address into the faucet address field and press the blue checkmark button.
 
 ![2  Testnet Faucet](https://user-images.githubusercontent.com/29760787/83368347-7a3d3c00-a386-11ea-940e-5ba4c83b32b8.jpg)
 
@@ -36,7 +36,7 @@ Paste in the source code from the QRC20Token.sol file.
 
 Here you can see the code has been edited to name the token "QRC TEST 527", with the symbol "QT527", and a supply of 1 billion.
 
-Also create a new file, enter the file name "SafeMath.sol" and paste in the code for [SafeMath.sol](https://github.com/qtumproject/QRC20Token/blob/master/SafeMath.sol).
+Also, create a new file, enter the file name "SafeMath.sol" and paste in the code for [SafeMath.sol](https://github.com/qtumproject/QRC20Token/blob/master/SafeMath.sol).
  
 Select the compiler button on the left side.
  
@@ -60,7 +60,7 @@ On the wallet, go to **Smart Contracts** - **Create** and paste the copied objec
 
 ![12  Paste in Bytecode](https://user-images.githubusercontent.com/29760787/83368410-af498e80-a386-11ea-9cfc-ae5908f393ff.jpg)
 
-At the bottom of the Create Contract form, click the drop down on "Sender Address" and select qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky. This sets the address to be used by the contract. Leave the gas set at 25000000 and price set at 0.0000040 unless you know how to safely change these. Click the **Create Contract** button and **Yes** to send the transaction. 
+At the bottom of the Create Contract form, click the drop-down on "Sender Address" and select qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky. This sets the address to be used by the contract. Leave the gas set at 25000000 and price set at 0.0000040 unless you know how to safely change these. Click the **Create Contract** button and **Yes** to send the transaction. 
 
 ![13  Select Address](https://user-images.githubusercontent.com/29760787/83368414-b2447f00-a386-11ea-8d0f-5928865e835e.jpg)
 
@@ -68,7 +68,7 @@ The wallet will confirm the transaction on the "Result 1" tab. Copy the Contract
 
 ![14  Results](https://user-images.githubusercontent.com/29760787/83368416-b4a6d900-a386-11ea-8e44-9c773aa94fa0.jpg)
 
-The wallet Transaction page will show the transactions so far. First, the wallet received 90.0 QTUM sent from the Testnet faucet. Next, the contract create transaction sent the contract bytecode and fees of 1.01414 QTUM. Finally, the wallet received a gas refund of 0.623456 QTUM. Gas refunds are sent in the coinstake transaction, so they show as "mined" in the wallet, and must mature for 500 blocks before they can be used. 
+The wallet Transaction page will show the transactions so far. First, the wallet received 90.0 QTUM sent from the Testnet faucet. Next, the contract create transaction sent the contract bytecode and fees of 1.01414 QTUM. Finally, the wallet received a gas refund of 0.623456 QTUM. Gas refunds are sent in the coinstake transaction, so they are show as "mined" in the wallet and must mature for 500 blocks before they can be used. 
 
 ![15  Transactions](https://user-images.githubusercontent.com/29760787/83368419-b7093300-a386-11ea-8508-86a14c7737ca.jpg)
 
@@ -90,13 +90,13 @@ Paste the contract address 137d046beb3cb66c0cdd389bf8bab4faeae16c0b into the "Co
 
 ![18  Paste Contract Address](https://user-images.githubusercontent.com/29760787/83368432-c1c3c800-a386-11ea-9b7b-5b4224934683.jpg)
 
-You will see the Log events prompt "Enable log events from the option menu in order to receive token transactions". We will do this step below.
+You will see the Log events prompt "Enable log events from the option menu to receive token transactions". We will do this step below.
 
 ![21  Log Events](https://user-images.githubusercontent.com/29760787/83368438-c9836c80-a386-11ea-9c0b-f27ef946be7c.jpg)
 
 # Send Tokens
 
-To send QRC20 tokens, select **QRC20 Tokens** and **Send**. Note there is single listing for the QT527 token tied to address qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky here, but tokens could be tied to different addresses of this wallet, in which case they would be listed individually and need to be sent individually.
+To send QRC20 tokens, select **QRC20 Tokens** and **Send**. Note there is single row listing for the QT527 token tied to address qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky here, but tokens could be tied to different addresses of this wallet, in which case they would be listed individually and need to be sent individually.
 
 Fill in the fields for "PayTo" and "Amount". The "Description" field is optional. Click **Send** and **Yes** to complete the transaction.
 
@@ -106,7 +106,7 @@ Wallet **Transactions** will now show the contract send transaction. Right-click
 
 # Enable Log Events
 
-We can follow up now on the previous prompt to enable log events. In order for the wallet to fully display token transactions it needs to have log events enabled. Select **Settings** - **Options** and click to select **Enable log events**. You must restart the wallet and rescan. The prompt will show "Client restart required to activate changes." Select **OK** then **Yes**. The wallet will exit, then restart the wallet. 
+We can follow up now on the previous prompt to enable log events. For the wallet to fully display token transactions it needs to have log events enabled. Select **Settings** - **Options** and click to select **Enable log events**. You must restart the wallet and rescan. The prompt will show "Client restart required to activate changes." Select **OK** then **Yes**. The wallet will exit, then restart the wallet. 
 
 ![20  Enable Log Events](https://user-images.githubusercontent.com/29760787/83368436-c7b9a900-a386-11ea-96f6-690abe10bfef.jpg)
 
