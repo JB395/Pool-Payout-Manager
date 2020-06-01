@@ -128,7 +128,7 @@ Now the tokens for each tied address are shown separately and each row can be us
 
 ![24  Two QRC20 Tokens Listed](https://user-images.githubusercontent.com/29760787/83448628-3bf45b00-a420-11ea-8288-795e482c381a.jpg)
 
-
+***
 
 
 
