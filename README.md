@@ -1,5 +1,7 @@
 Work in progress documentation
 
+[Creating QRC20 Tokens](
+
 # Creating QRC20 Tokens
 
 You can use [QRC20Token](https://github.com/qtumproject/QRC20Token) code to create your own QRC20 token on Qtum. For this example, we will use Qtum testnet, first getting some testnet QTUM.
