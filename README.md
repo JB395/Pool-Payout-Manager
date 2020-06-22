@@ -1,137 +1,166 @@
 Work in progress documentation
 
-* [Creating QRC20 Tokens](https://github.com/JB395/Various-Documentation/blob/master/README.md#creating-qrc20-tokens)
-* [Adding Tokens](https://github.com/JB395/Various-Documentation/blob/master/README.md#adding-tokens)
-* [Send Tokens](https://github.com/JB395/Various-Documentation/blob/master/README.md#send-tokens)
-* [Enable Log Events](https://github.com/JB395/Various-Documentation/blob/master/README.md#enable-log-events)
-* [Multiple Tokens in Wallet](https://github.com/JB395/Various-Documentation/blob/master/README.md#multiple-tokens-in-wallet)
+* [Delegating Address to Super Staker](https://github.com/JB395/Various-Documentation/blob/master/README.md#delegating-address-to-super-staker)
+* [Delegating Address Operations](https://github.com/JB395/Various-Documentation/blob/master/README.md#delegating-aAddress-operations)
+* [Super Staker Configuration](https://github.com/JB395/Various-Documentation/blob/master/README.md#super-staker-configuration)
+* [Launching Qtum Core as a Super Staker](https://github.com/JB395/Various-Documentation/blob/master/README.md#launching-qtum-core-as-a-super-staker)
+* [qtumd Super Staker](https://github.com/JB395/Various-Documentation/blob/master/README.md#qtumd-super-staker)
+* [Super Staker Operations](https://github.com/JB395/Various-Documentation/blob/master/README.md#super-staker-operations)
+* [Restore](https://github.com/JB395/Various-Documentation/blob/master/README.md#restore)
 
-# Creating QRC20 Tokens
+# Delegating Address to Super Staker
 
-You can use [QRC20Token](https://github.com/qtumproject/QRC20Token) code to create your own QRC20 token on Qtum. For this example, we will use Qtum testnet, first getting some testnet QTUM.
+Qtum Offline Staking allows the address for a non-staking wallet (capable of making the delegation assignment transaction) to be delegated to a Super Staker. Offline Staking is non-custodial: the delegation user keeps full control of their coins and private keys. The address delegation is made via a smart contract transaction from the delegation user’s wallet which identifies the delegator’s address, the Super Staker address, and the fee the delegator agrees to pay. If the Super Staker accepts this fee, it will begin staking the delegated address UTXOs.
 
-After installing the Qtum Core wallet from https://qtumeco.io/wallet or https://github.com/qtumproject/qtum/releases, get the wallet receiving address by selecting **Window** - **Receiving addresses**, select and copy the wallet receiving address qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky.
+The normal rules for staking UTXOs apply to delegated UTXOs:
 
-![1  Copy Receiving Address](https://user-images.githubusercontent.com/29760787/83368341-727d9780-a386-11ea-973d-5f8b13767802.jpg)
+* UTXOs may only be used for staking after they mature (500 confirmations)
+* The Super Staker will set a minimum size of UTXOs to stake, defaulting to 100 QTUM. Delegated UTXOs below this amount will be ignored.
+* It is best practice (for optimum returns) to break UTXOs up into sizes of 100 to 200 QTUM each. For users of the Qtum Core wallet, this can be easily accomplished with the command line version of `splitutxosforaddress`, described below.
 
-We need some QTUM to pay for the smart contract gas and transaction fees and can get some testnet QTUM from the [Qtum Testnet Faucet](http://testnet-faucet.qtum.info/). Paste the receiving address into the faucet address field and press the blue checkmark button.
+To make the delegation assignment from the Qtum Core wallet, select Stake – Delegations, the Add delegation “+” button in the upper right corner, enter the Staker name (for local reference only), Staker address, Fee you agree to pay, and your Address to be delegated. Leave the default Gas settings alone unless you understand how to set these. The delegation transaction will require at least 0.9 QTUM in fees and any excess will be refunded.
 
-![2  Testnet Faucet](https://user-images.githubusercontent.com/29760787/83368347-7a3d3c00-a386-11ea-940e-5ba4c83b32b8.jpg)
+![1  Add Delegation Assignment](https://user-images.githubusercontent.com/29760787/85325850-4e4f3b00-b49a-11ea-851a-73c1ef481adb.jpg) 
 
-Next, copy the token code at [QRC20Token](https://github.com/qtumproject/QRC20Token). In the QRC20Token.sol file you can change `name`, `symbol`, and `totalSupply` to your preference. For this example, we will edit later to name the token "QRC TEST 527", the symbol "QT527" and have a total supply of 1,000,000,000 which is entered as "10 * * 9". We will leave `decimals` set for 8, to give 8 decimal places for each token, so for example, you should send a 1.12345678 token amount. 
+Press Confirm and Yes to send the delegation transaction.
 
-![3  Solidity](https://user-images.githubusercontent.com/29760787/83368355-7dd0c300-a386-11ea-820c-2ce2788e5777.jpg)
+Delegation of addresses may also be accomplished using the Qtum Electrum wallet, which supports Ledger and Trezor hardware wallet addresses.
 
-After editing the Solidity file, save it locally or just copy to paste into Remix.
+# Delegating Address Operations
 
-Next, we will use Remix to compile the Solidity code into bytecode. In a browser, go to Remix at http://remix.ethereum.org/ and select the SOLIDITY Environment.
+The Delegate Address transaction is sent to a smart contract which keeps the delegation assignments and will be picked up by the Super Staker there. You can see Delegated Address block reward transactions in the wallet and also with the explorer [qtum.info](https://qtum.info/).
 
-![4  Select Solidity](https://user-images.githubusercontent.com/29760787/83368369-8d500c00-a386-11ea-9c80-98243d69bcd8.jpg)
+If the wallet is holding QTUM on multiple addresses, the delegation must be made separately for each address (and the transaction fee paid for each address) so it may make sense to consolidate the UTXOs to a single address before splitting UTXOs and delegating. In this case, use coin selection to select and consolidate the addresses. Alternatively, the `sendmanywithdupes` command could be used to send the entire wallet balance to a new address with appropriately-sized UTXOs.
 
-Click the "+" button to create a new file.
+If the Super Staker accepts a delegation for a particular fee, and then the Super Staker reduces that fee (accepts assignments for a lower fee), to take advantage of that lower fee the user must delegate their address again with the lower fee set.
 
-![5  New File](https://user-images.githubusercontent.com/29760787/83368379-92ad5680-a386-11ea-9175-c8d42da28bab.jpg)
+Delegations from a wallet may be checked on the Stake – Delegations page or with the `getdelegationinfoforaddress` command.
 
-Enter the file name "QRC20Token.sol" and "OK" to create a new file. 
+Backup your wallet to save a copy of the wallet.dat file.
+ 
+# Super Staker Configuration
 
-![6  Enter File Name](https://user-images.githubusercontent.com/29760787/83368383-96d97400-a386-11ea-84e7-7dd367aa9f00.jpg)
+The Qtum Core wallet provides online Proof of Stake and can be launched and configured to operate as a Super Staker and receive address delegations.
 
-Paste in the source code from the QRC20Token.sol file.
+To configure the Qtum-Qt wallet for a Super Staker, select Stake – Super Staking and the “+” button to add a new Super Staker. Enter the Staker name (for local reference only, here using the first part of the address and “10” to denote a 10% fee) and select the Staker address using the dropdown.
 
-![7  Paste in Code](https://user-images.githubusercontent.com/29760787/83368385-9a6cfb00-a386-11ea-88d6-5624214580bf.jpg)
+![2  Super Staker Setup](https://user-images.githubusercontent.com/29760787/85325865-54ddb280-b49a-11ea-8485-77f854137e26.jpg)
 
-Here you can see the code has been edited to name the token "QRC TEST 527", with the symbol "QT527", and a supply of 1 billion.
+To operate as a Super Staker, the wallet must be able to check arbitrary addresses (address index), have logs enabled for smart contract operations(log events), be enabled for staking and the single parameter `-superstaking=true` sets these three parameters. The first time launching with `-superstaking=true` the wallet will rescan the blockchain to rebuild the database to add the address index and log events.
 
-Also, create a new file, enter the file name "SafeMath.sol" and paste in the code for [SafeMath.sol](https://github.com/qtumproject/QRC20Token/blob/master/SafeMath.sol).
+Next, the wallet will prompt to be restarted as a Super Staker using Settings – Options – Enable super staking and OK to restart the wallet.
+
+![3  Qtum-Qt Enable Super Staker](https://user-images.githubusercontent.com/29760787/85325878-5909d000-b49a-11ea-9c4e-59dd57d4e25d.jpg)
  
-Select the compiler button on the left side.
+On startup, the wallet will confirm that you want to scan and rebuild the database.
+
+![4  Rebuild the Database](https://user-images.githubusercontent.com/29760787/85325888-5dce8400-b49a-11ea-821a-b8563df589e4.jpg)
+
+The wallet will show “Reindexing blocks on disk…” and “Syncing Headers” while it rebuilds the database, this may take several tens of minutes depending on your computer.
+
+After launching, go back to the Stake – Super Staking page and select the “Configure super staker” button (the gear symbol will now be visible) to compete the Super Staker configuration. Click the Custom box to see the default recommendations (shown below) or customize the setup. Click OK to complete the setup.
+
+![5  Super Staker Options](https://user-images.githubusercontent.com/29760787/85325914-658e2880-b49a-11ea-8622-07e5d1207b63.jpg)
+
+The configuration settings are:
+
+* Minimum fee – the minimum fee offered by delegators that the Staker will accept.
+* Minimum UTXO size – this sets the minimum-sized UTXO that will be evaluated for Proof of Stake consensus by the Staker. Over time, the delegated address should accumulate many small block reward UTXOs and it is inefficient to manage all these small amounts (which should be recombined by the delegator). 
+* Delegation list type:
+  *	Accept all – accept any delegation with the minimum fee or more.
+  *	Allow list – only accept delegations from specific addresses. Use this mode if operating a Super Staker only for specific addresses, such as for your coins.
+  *	Exclude list – addresses to exclude from being accepted for staking.
+
+Next, split the UTXOs to valid amounts for committing stakes by the Super Staker. The UTXOs must be a minimum amount of 100 QTUM. On the Super staker page select the split coins button (trident icon) and use the default values or make adjustments, but no UTXOs under 100 QTUM will be used for staking.
+
+![6  Split UTXOs GUI](https://user-images.githubusercontent.com/29760787/85325926-6921af80-b49a-11ea-98d7-332d8f241013.jpg)
+
+You can also split UTXOs with the `splitutxosforaddress` command, which can be used for delegated addresses as well. To split the UTXOs between a minimum and maximum value, enter the command:
+
+`splitutxosforaddress "address" minValue maxValue ( maxOutputs )`
+
+For example, if a wallet held UTXOs of 40, 50, 60, 70, and 800 QTUM, to split these into UTXOs of a minimum 100 and maximum 200 would use the command:
+
+```splitutxosforaddress "qQhm128r4cTuDFSRehLESydnkburYLj9cY" 100 200
+
+{
+  "txid": "197a199c3ac9dd8df574ca77da15c5da31db3f7101e2108638a3b2f94248b9f7",
+  "selected": "1020.00",
+  "splited": "1020.00"
+}
+```
+
+For this example, the total input was 1,020 QTUM, and the split was 9 UTXOs of 100.0 and one of 119.99566, the wallet sending a “transaction to self” and paying a fee of 0.00434 QTUM.
+
+Previously you could use the `sendmanywithdupes` command but that took significant formatting and operationally you would want to send to a new address. Of course, after either of these commands, the UTXOs must mature for 500 confirmations before they can be used for staking.
+
+# Launching Qtum Core as a Super Staker
+
+The above steps show the transition from a default installation Qtum Core wallet to a Super Staker. The wallet may also be initially launched as a Super Staker to shorten the steps. In this case, the initial blockchain sync is accompanied by building the database for address index and log events (as discussed above) so the wallet is all ready for Super Staking.
+
+The Qtum Core wallet may be launched as a Super Staker with Qtum-Qt using Settings - Options – Main – Enable super staking steps as shown above, or directly through the command line using the `-superstaking=true` parameter (testnet shown here).
+
+![7  Linux Launch](https://user-images.githubusercontent.com/29760787/85325943-72128100-b49a-11ea-8d66-cd5a5ea243dd.png) 
+
+This command for the default program directory on Windows would be:
+
+`qtum-qt -testnet -superstaking=true`
+
+![8  Windows Command Line Launch](https://user-images.githubusercontent.com/29760787/85325959-763e9e80-b49a-11ea-9353-d625f7270d72.jpg) 
+
+When the wallet launches and syncs the blockchain (creating address index and log events) it is all ready to add Super Stakers. Configure a Super Staker and then enable super staking on Settings – Options – Main – set “Enable super staking” and the Super Staker will be ready.
+
+# qtumd Super Staker
+
+Any address in a Qtum Core wallet running as a Super Staker may receive delegated addresses and operate as an individual Super Staker. The Desktop GUI wallet Qtum-Qt allows configuration of multiple Super Staker addresses with different fees and minimum UTXO sizes. The daemon/server wallet qtumd runs all its Super Staker addresses using the same fee and minimum UTXO size. If a variation is needed across multiple Super Staker addresses with qtumd, it is possible to set these up with the Qtum-Qt wallet and simply transfer the wallet.dat file to qtumd. 
+
+The following setup for qtumd shows the use of a single Super Staker address.
+
+After installing qtumd, launch with the following parameters (testnet shown):
+
+`./qtumd -testnet -superstaking=true`
+
+Optional parameters may be added to change the default fee (of 10%) and minimum UTXO value (of 100 QTUM), for example as:
+
+`-stakingminfee=12  -stakingminutxovalue=120`
+
+Once the wallet syncs the blockchain, get an address to send some QTUM. This will be the Super Staker address. Use the command:
+
+`./qtum-cli -testnet getnewaddress "legacy"`
+
+Then send 1,300 QTUM to this address.
+
+![9  Getnewaddress Getbalance](https://user-images.githubusercontent.com/29760787/85325976-7b9be900-b49a-11ea-9402-2839513e4d2c.png) 
+
+This 1,300 QTUM will arrive in a single UTXO, which must be split for the Super Staker operation. Use the `splitutxosforaddress` command with the default 100 minimum size and 200 maximum size:
+
+`./qtum-cli -testnet splitutxosforaddress "qdMp2BNpwL6ZmMEQHfLV5wGNVgmPCuzd7d" 100 200`
+
+![10  Split UTXOs for Address qtumd](https://user-images.githubusercontent.com/29760787/85325993-7f2f7000-b49a-11ea-99a9-6a9cfc35db86.png) 
+
+The command response shows that 1,300 QTUM were selected for splitting, in this case splitting into 12 UTXOs which can be seen with the txid on the Explorer.
+
+At this point, the qtumd wallet is ready for Super Staker operation with address qdMp2BNpwL6ZmMEQHfLV5wGNVgmPCuzd7d, and delegations can be monitored using the command:
+
+`getdelegationsforstaker "qdMp2BNpwL6ZmMEQHfLV5wGNVgmPCuzd7d"`
+
+# Super Staker Operations
+
+The Super Staker must hold UTXOs to commit to stakes for the delegated UTXOs it is staking. The number of UTXOs (of minimum size 100 QTUM) is based on Delegated Weight as a percent of overall Network Weight, and good values are 30 UTXOs for staking 1% of Network Weight, 50 UTXOs for 2.0%, 100 UTXOs for 5% and 160 UTXOs for staking 10% of overall Network Weight. 
+
+Super Stakers should monitor their Wallet weight (UTXO weight minus amount currently staking) and add UTXOs if it drops below several thousand.
+
+Make a backup of the wallet (save the wallet.dat file) after changes in the offline staking configuration such as adding a Super Staker or adding a delegation, because the offline staking configuration is saved in the wallet.dat file. If the backup wallet.dat file is lost the configuration may also be restored with Recovery as shown below.
+
+Delegations to a Super Staker may be checked using the “Delegations…” button on the Super Staker page or with the `getdelegationsforstaker` command.
+
+
+# Restore
+
+Normally delegation and Super Staker configuration are stored in the wallet.dat file. If there are problems with the wallet.dat file the delegation information and super staker information may be recovered using the Restore button on the delegation and Super Staker pages. In this case, the wallet will rescan the “state” contract memory for offline staking transactions for the appropriate addresses.
+
+![11  Restore super stakers](https://user-images.githubusercontent.com/29760787/85325996-822a6080-b49a-11ea-8c4b-3930f9c5e234.jpg)
  
-![8  Compiler](https://user-images.githubusercontent.com/29760787/83368393-a062dc00-a386-11ea-8ae2-6c236a4cd288.jpg)
-
-The compiler tab is shown below. You can leave the Solidity version set for 0.4.26. At the top, click the tab for QRC20Token.sol to select that file to compile, and click the blue **Compile QRC20Token.sol** button to compile the source code into bytecode.
-
-![9  Run Compiler](https://user-images.githubusercontent.com/29760787/83368395-a35dcc80-a386-11ea-9b16-762ff3d31439.jpg)
-
-Ignore the warnings.
-
-Click on the Bytecode button to copy the bytecode.
-
-![10  Copy Bytecode](https://user-images.githubusercontent.com/29760787/83368400-a789ea00-a386-11ea-85cf-4efa71e8d900.jpg)
-
-Paste the copied bytecode into a text editor, and select just the numeric characters for the object code (shown here highlighted in blue). The object code starts with "60806" and ends with "00029" (not shown in this image).
-
-![11  Get Object](https://user-images.githubusercontent.com/29760787/83368405-aa84da80-a386-11ea-9e2f-6ff1709343d9.jpg)
-
-On the wallet, go to **Smart Contracts** - **Create** and paste the copied object code into the "Bytecode" field.
-
-![12  Paste in Bytecode](https://user-images.githubusercontent.com/29760787/83368410-af498e80-a386-11ea-9cfc-ae5908f393ff.jpg)
-
-At the bottom of the Create Contract form, click the drop-down on "Sender Address" and select qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky. This sets the address to be used by the contract. Leave the gas set at 25000000 and price set at 0.0000040 unless you know how to safely change these. Click the **Create Contract** button and **Yes** to send the transaction. 
-
-![13  Select Address](https://user-images.githubusercontent.com/29760787/83368414-b2447f00-a386-11ea-8d0f-5928865e835e.jpg)
-
-The wallet will confirm the transaction on the "Result 1" tab. Copy the Contract Address 137d046beb3cb66c0cdd389bf8bab4faeae16c0b.
-
-![14  Results](https://user-images.githubusercontent.com/29760787/83368416-b4a6d900-a386-11ea-8e44-9c773aa94fa0.jpg)
-
-The wallet Transaction page will show the transactions so far. First, the wallet received 90.0 QTUM sent from the Testnet faucet. Next, the contract create transaction sent the contract bytecode and fees of 1.01414 QTUM. Finally, the wallet received a gas refund of 0.623456 QTUM. Gas refunds are sent in the coinstake transaction, so they are show as "mined" in the wallet and must mature for 500 blocks before they can be used. 
-
-![15  Transactions](https://user-images.githubusercontent.com/29760787/83368419-b7093300-a386-11ea-8508-86a14c7737ca.jpg)
-
-You can also see the contract create transaction on [testnet.qtum.info](https://testnet.qtum.info/tx/0db7a5f38c1959d473405165bf842dcf726c9b79615b0b294514cb44e53fb801)
-
-![16  Explorer](https://user-images.githubusercontent.com/29760787/83368426-bc667d80-a386-11ea-8039-6e3bc2f519f0.jpg)
-
-The transaction was sent with 2,500,000 gas at price of 0.00000040 QTUM. The contract creation used 941,360 gas giving a gas refund of 2,500,000 - 941,360 = 1,558,640 at price of 0.00000040 or 0.623456 QTUM for the refund. 
-
-# Adding Tokens
-
-Smart contract transactions are sent to the smart contract address, not the wallet address, and for the wallet to see or make smart contract transactions we must inform the wallet, in this case by "adding" the token. To see the new token in the wallet, select **QRC Tokens** and the "**+**" button to the right of the Add new token.
-
-![17  Add Token](https://user-images.githubusercontent.com/29760787/83368428-bf616e00-a386-11ea-8a72-ba2a19c21959.jpg)
-
-Paste the contract address 137d046beb3cb66c0cdd389bf8bab4faeae16c0b into the "Contract Address" field, and rest of the form will be autofilled. At the bottom of the form click the drop-down arrow to the right of the Token address field and select qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky and **Confirm**. If the wallet is using multiple addresses, chose the correct Qtum address that was used to create the token.
-
-![18  Paste Contract Address](https://user-images.githubusercontent.com/29760787/83368432-c1c3c800-a386-11ea-9b7b-5b4224934683.jpg)
-
-You will see the Log events prompt "Enable log events from the option menu to receive token transactions". We will do this step below.
-
-![21  Log Events](https://user-images.githubusercontent.com/29760787/83368438-c9836c80-a386-11ea-9c0b-f27ef946be7c.jpg)
-
-# Sending Tokens
-
-To send QRC20 tokens, select **QRC20 Tokens** and **Send**. Note there is single row listing for the QT527 token tied to address qXGdYmLypZRy8pTpj9EdTBHkqtv6cv99ky here, but tokens could be tied to different addresses of this wallet, in which case they would be listed individually and need to be sent individually.
-
-Fill in the fields for "PayTo" and "Amount". The "Description" field is optional. Click **Send** and **Yes** to complete the transaction.
-
-![19  Send QRC20 Tokens](https://user-images.githubusercontent.com/29760787/83368435-c4beb880-a386-11ea-9ebe-277f20e0b6ab.jpg)
-
-Wallet **Transactions** will now show the contract send transaction. Right-click on the transaction to see the details including the transaction ID.
-
-# Enable Log Events
-
-We can follow up now on the previous prompt to enable log events. For the wallet to fully display token transactions it needs to have log events enabled. Select **Settings** - **Options** and click to select **Enable log events**. You must restart the wallet and rescan. The prompt will show "Client restart required to activate changes." Select **OK** then **Yes**. The wallet will exit, then restart the wallet. 
-
-![20  Enable Log Events](https://user-images.githubusercontent.com/29760787/83368436-c7b9a900-a386-11ea-96f6-690abe10bfef.jpg)
-
-When the wallet restarts, click **OK** to rebuild the block database. 
-
-The wallet status will show "Reindexing blocks on disk..." and "Syncing headers" for several minutes or several tens of minutes, depending on your computer. 
-
-![22  Restarting Rebuild Database](https://user-images.githubusercontent.com/29760787/83368451-d607c500-a386-11ea-9caa-cb855bb3e07d.jpg)
-
-# Multiple Tokens in Wallet
-
-QRC20 token balances are managed by the smart contract for individual Qtum addresses, even if these Qtum addresses are for the same wallet.
-
-Continuing the example above, we sent 500 QT527 tokens to the wallet on a new receiving address qRdxBZSvUx1edUfygyHr35mVgmX9pAMLrZ. To show this new transaction of QT527 tokens in the wallet we must complete the Add Token step for this new address.
-
-![23  Add 2nd Token](https://user-images.githubusercontent.com/29760787/83447393-5cbbb100-a41e-11ea-889e-8675e626341e.jpg)
-
-Now the tokens for each tied address are shown separately and each row can be used separately for send and receive operations.
-
-![24  Two QRC20 Tokens Listed](https://user-images.githubusercontent.com/29760787/83448628-3bf45b00-a420-11ea-8288-795e482c381a.jpg)
-
 ***
 
 
