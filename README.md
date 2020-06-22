@@ -1,4 +1,5 @@
-Work in progress documentation
+***
+# Offline Staking
 
 * [Delegating Address to Super Staker](https://github.com/JB395/Various-Documentation/blob/master/README.md#delegating-address-to-super-staker)
 * [Delegating Address Operations](https://github.com/JB395/Various-Documentation/blob/master/README.md#delegating-aAddress-operations)
@@ -10,7 +11,7 @@ Work in progress documentation
 
 # Delegating Address to Super Staker
 
-Qtum Offline Staking allows the address for a non-staking wallet (capable of making the delegation assignment transaction) to be delegated to a Super Staker. Offline Staking is non-custodial: the delegation user keeps full control of their coins and private keys. The address delegation is made via a smart contract transaction from the delegation user’s wallet which identifies the delegator’s address, the Super Staker address, and the fee the delegator agrees to pay. If the Super Staker accepts this fee, it will begin staking the delegated address UTXOs.
+Qtum Offline Staking allows the address for a non-staking wallet (capable of making the delegation assignment transaction) to be delegated to a Super Staker. Offline Staking is non-custodial: the delegation user keeps full control of their coins and private keys. The address delegation is made via a smart contract transaction from the delegation user's wallet which identifies the delegator's address, the Super Staker address, and the fee the delegator agrees to pay. If the Super Staker accepts this fee, it will begin staking the delegated address UTXOs.
 
 The normal rules for staking UTXOs apply to delegated UTXOs:
 
@@ -18,7 +19,7 @@ The normal rules for staking UTXOs apply to delegated UTXOs:
 * The Super Staker will set a minimum size of UTXOs to stake, defaulting to 100 QTUM. Delegated UTXOs below this amount will be ignored.
 * It is best practice (for optimum returns) to break UTXOs up into sizes of 100 to 200 QTUM each. For users of the Qtum Core wallet, this can be easily accomplished with the command line version of `splitutxosforaddress`, described below.
 
-To make the delegation assignment from the Qtum Core wallet, select Stake – Delegations, the Add delegation “+” button in the upper right corner, enter the Staker name (for local reference only), Staker address, Fee you agree to pay, and your Address to be delegated. Leave the default Gas settings alone unless you understand how to set these. The delegation transaction will require at least 0.9 QTUM in fees and any excess will be refunded.
+To make the delegation assignment from the Qtum Core wallet, select Stake – Delegations, the Add delegation "+" button in the upper right corner, enter the Staker name (for local reference only), Staker address, Fee you agree to pay, and your Address to be delegated. Leave the default Gas settings alone unless you understand how to set these. The delegation transaction will require at least 0.9 QTUM in fees and any excess will be refunded.
 
 ![1  Add Delegation Assignment](https://user-images.githubusercontent.com/29760787/85325850-4e4f3b00-b49a-11ea-851a-73c1ef481adb.jpg) 
 
@@ -42,7 +43,7 @@ Backup your wallet to save a copy of the wallet.dat file.
 
 The Qtum Core wallet provides online Proof of Stake and can be launched and configured to operate as a Super Staker and receive address delegations.
 
-To configure the Qtum-Qt wallet for a Super Staker, select Stake – Super Staking and the “+” button to add a new Super Staker. Enter the Staker name (for local reference only, here using the first part of the address and “10” to denote a 10% fee) and select the Staker address using the dropdown.
+To configure the Qtum-Qt wallet for a Super Staker, select Stake – Super Staking and the "+" button to add a new Super Staker. Enter the Staker name (for local reference only, here using the first part of the address and "10" to denote a 10% fee) and select the Staker address using the dropdown.
 
 ![2  Super Staker Setup](https://user-images.githubusercontent.com/29760787/85325865-54ddb280-b49a-11ea-8485-77f854137e26.jpg)
 
@@ -56,9 +57,9 @@ On startup, the wallet will confirm that you want to scan and rebuild the databa
 
 ![4  Rebuild the Database](https://user-images.githubusercontent.com/29760787/85325888-5dce8400-b49a-11ea-821a-b8563df589e4.jpg)
 
-The wallet will show “Reindexing blocks on disk…” and “Syncing Headers” while it rebuilds the database, this may take several tens of minutes depending on your computer.
+The wallet will show "Reindexing blocks on disk…" and "Syncing Headers" while it rebuilds the database, this may take several tens of minutes depending on your computer.
 
-After launching, go back to the Stake – Super Staking page and select the “Configure super staker” button (the gear symbol will now be visible) to compete the Super Staker configuration. Click the Custom box to see the default recommendations (shown below) or customize the setup. Click OK to complete the setup.
+After launching, go back to the Stake – Super Staking page and select the "Configure super staker" button (the gear symbol will now be visible) to compete the Super Staker configuration. Click the Custom box to see the default recommendations (shown below) or customize the setup. Click OK to complete the setup.
 
 ![5  Super Staker Options](https://user-images.githubusercontent.com/29760787/85325914-658e2880-b49a-11ea-8622-07e5d1207b63.jpg)
 
@@ -90,7 +91,7 @@ For example, if a wallet held UTXOs of 40, 50, 60, 70, and 800 QTUM, to split th
 }
 ```
 
-For this example, the total input was 1,020 QTUM, and the split was 9 UTXOs of 100.0 and one of 119.99566, the wallet sending a “transaction to self” and paying a fee of 0.00434 QTUM.
+For this example, the total input was 1,020 QTUM, and the split was 9 UTXOs of 100.0 and one of 119.99566, the wallet sending a "transaction to self" and paying a fee of 0.00434 QTUM.
 
 Previously you could use the `sendmanywithdupes` command but that took significant formatting and operationally you would want to send to a new address. Of course, after either of these commands, the UTXOs must mature for 500 confirmations before they can be used for staking.
 
@@ -108,7 +109,7 @@ This command for the default program directory on Windows would be:
 
 ![8  Windows Command Line Launch](https://user-images.githubusercontent.com/29760787/85325959-763e9e80-b49a-11ea-9353-d625f7270d72.jpg) 
 
-When the wallet launches and syncs the blockchain (creating address index and log events) it is all ready to add Super Stakers. Configure a Super Staker and then enable super staking on Settings – Options – Main – set “Enable super staking” and the Super Staker will be ready.
+When the wallet launches and syncs the blockchain (creating address index and log events) it is all ready to add Super Stakers. Configure a Super Staker and then enable super staking on Settings – Options – Main – set "Enable super staking" and the Super Staker will be ready.
 
 # qtumd Super Staker
 
@@ -152,12 +153,12 @@ Super Stakers should monitor their Wallet weight (UTXO weight minus amount curre
 
 Make a backup of the wallet (save the wallet.dat file) after changes in the offline staking configuration such as adding a Super Staker or adding a delegation, because the offline staking configuration is saved in the wallet.dat file. If the backup wallet.dat file is lost the configuration may also be restored with Recovery as shown below.
 
-Delegations to a Super Staker may be checked using the “Delegations…” button on the Super Staker page or with the `getdelegationsforstaker` command.
+Delegations to a Super Staker may be checked using the "Delegations…" button on the Super Staker page or with the `getdelegationsforstaker` command.
 
 
 # Restore
 
-Normally delegation and Super Staker configuration are stored in the wallet.dat file. If there are problems with the wallet.dat file the delegation information and super staker information may be recovered using the Restore button on the delegation and Super Staker pages. In this case, the wallet will rescan the “state” contract memory for offline staking transactions for the appropriate addresses.
+Normally delegation and Super Staker configuration are stored in the wallet.dat file. If there are problems with the wallet.dat file the delegation information and super staker information may be recovered using the Restore button on the delegation and Super Staker pages. In this case, the wallet will rescan the "state" contract memory for offline staking transactions for the appropriate addresses.
 
 ![11  Restore super stakers](https://user-images.githubusercontent.com/29760787/85325996-822a6080-b49a-11ea-8c4b-3930f9c5e234.jpg)
  
