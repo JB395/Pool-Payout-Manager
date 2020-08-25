@@ -1,175 +1,248 @@
 ***
-# Offline Staking
+PoolPayoutManager.py (PPM)
 
-* [Delegating Address to Super Staker](https://github.com/JB395/Various-Documentation/blob/master/README.md#delegating-address-to-super-staker)
-* [Delegating Address Operations](https://github.com/JB395/Various-Documentation/blob/master/README.md#delegating-aAddress-operations)
-* [Super Staker Configuration](https://github.com/JB395/Various-Documentation/blob/master/README.md#super-staker-configuration)
-* [Launching Qtum Core as a Super Staker](https://github.com/JB395/Various-Documentation/blob/master/README.md#launching-qtum-core-as-a-super-staker)
-* [qtumd Super Staker](https://github.com/JB395/Various-Documentation/blob/master/README.md#qtumd-super-staker)
-* [Super Staker Operations](https://github.com/JB395/Various-Documentation/blob/master/README.md#super-staker-operations)
-* [Restore](https://github.com/JB395/Various-Documentation/blob/master/README.md#restore)
+Copyright (c) 2020 Qtum Chain Foundation
+Beta software, use at your own risk
+MIT License
 
-# Delegating Address to Super Staker
+# Error Message
 
-Qtum Offline Staking allows the address for a non-staking wallet (capable of making the delegation assignment transaction) to be delegated to a Super Staker. Offline Staking is non-custodial: the delegation user keeps full control of their coins and private keys. The address delegation is made via a smart contract transaction from the delegation user's wallet which identifies the delegator's address, the Super Staker address, and the fee the delegator agrees to pay. If the Super Staker accepts this fee, it will begin staking the delegated address UTXOs.
+2020-07-05T17:56:14Z : You need to rebuild the database using -reindex
+to change -addrindex.
+Please restart with -reindex or -reindex-chainstate to recover.
+: You need to rebuild the database using -reindex to change -addrindex.
+Please restart with -reindex or -reindex-chainstate to recover.
 
-The normal rules for staking UTXOs apply to delegated UTXOs:
+# About PPM
 
-* UTXOs may only be used for staking after they mature (500 confirmations)
-* The Super Staker will set a minimum size of UTXOs to stake, defaulting to 100 QTUM. Delegated UTXOs below this amount will be ignored.
-* It is best practice (for optimum returns) to break UTXOs up into sizes of 100 to 200 QTUM each. For users of the Qtum Core wallet, this can be easily accomplished with the command line version of `splitutxosforaddress`, described below.
+PPM is a Proof of Concept program to monitor qtumd operating as a 100% fee super staker
+(a pool), tracks and makes payouts, sends emails and logs activity.
+PPM uses qtum-cli to send CLI queries to the qtumd server application
+to identify staking events, and log various activities of the super staker.
+PPM sends a query to check for a new block approximately every 4 seconds, but will
+wait 5 confirmations before checking a new block (to let orphans settle out).
+PPM will require qtumd to be running and staking enabled (decrypted for
+staking only), or will stay in an error loop until these two conditions are met.
 
-To make the delegation assignment from the Qtum Core wallet, select Stake – Delegations, the Add delegation "+" button in the upper right corner, enter the Staker name (for local reference only), Staker address, Fee you agree to pay, and your Address to be delegated. Leave the default Gas settings alone unless you understand how to set these. The delegation transaction will require at least 0.9 QTUM in fees and any excess will be refunded.
+As a Proof of Concept, PPM uses many global variables and simple (linear search) arrays for data
+storage (the delegates and their accumulated payout). Data responses from the node are typically stored
+in the global variable "data", which may then be parsed by the main program or various functions. The principal
+arrays are delegateArray[] which stores the delegates for this super staker, and poolShareArray[] which
+stores the payout accrued by each block reward for the delegate. Delegate payouts must reach a minimum of 
+0.001 QTUM, (dconfigurable) or else they are carried over to accrue in the next period.
 
-![1  Add Delegation Assignment](https://user-images.githubusercontent.com/29760787/85325850-4e4f3b00-b49a-11ea-851a-73c1ef481adb.jpg) 
+# qtumd launch parameters (pool)
 
-Press Confirm and Yes to send the delegation transaction.
+./qtumd -testnet -superstaking -stakingminfee=100 -stakingminutxovalue=25 -txindex -reservebalance=1500
 
-Delegation of addresses may also be accomplished using the Qtum Electrum wallet, which supports Ledger and Trezor hardware wallet addresses.
+# Path and folders
 
-# Delegating Address Operations
+qtumd and PPM do not require any path setup. These files should be located
+in the same directory/folder, and both qtumd and PPM run from that directory.
+PPM will write the log files and block number pool share files to subdirectories
+as shown.
 
-The Delegate Address transaction is sent to a smart contract which keeps the delegation assignments and will be picked up by the Super Staker there. You can see Delegated Address block reward transactions in the wallet and also with the explorer [qtum.info](https://qtum.info/).
+# Directory configuration
 
-If the wallet is holding QTUM on multiple addresses, the delegation must be made separately for each address (and the transaction fee paid for each address) so it may make sense to consolidate the UTXOs to a single address before splitting UTXOs and delegating. In this case, use coin selection to select and consolidate the addresses. Alternatively, the `sendmanywithdupes` command could be used to send the entire wallet balance to a new address with appropriately-sized UTXOs.
-
-If the Super Staker accepts a delegation for a particular fee, and then the Super Staker reduces that fee (accepts assignments for a lower fee), to take advantage of that lower fee the user must delegate their address again with the lower fee set.
-
-Delegations from a wallet may be checked on the Stake – Delegations page or with the `getdelegationinfoforaddress` command.
-
-Backup your wallet to save a copy of the wallet.dat file.
- 
-# Super Staker Configuration
-
-The Qtum Core wallet provides online Proof of Stake and can be launched and configured to operate as a Super Staker and receive address delegations.
-
-To configure the Qtum-Qt wallet for a Super Staker, select Stake – Super Staking and the "+" button to add a new Super Staker. Enter the Staker name (for local reference only, here using the first part of the address and "10" to denote a 10% fee) and select the Staker address using the dropdown.
-
-![2  Super Staker Setup](https://user-images.githubusercontent.com/29760787/85325865-54ddb280-b49a-11ea-8485-77f854137e26.jpg)
-
-To operate as a Super Staker, the wallet must be able to check arbitrary addresses (address index), have logs enabled for smart contract operations(log events), be enabled for staking and the single parameter `-superstaking=true` sets these three parameters. The first time launching with `-superstaking=true` the wallet will rescan the blockchain to rebuild the database to add the address index and log events.
-
-Next, the wallet will prompt to be restarted as a Super Staker using Settings – Options – Enable super staking and OK to restart the wallet.
-
-![3  Qtum-Qt Enable Super Staker](https://user-images.githubusercontent.com/29760787/85325878-5909d000-b49a-11ea-9c4e-59dd57d4e25d.jpg)
- 
-On startup, the wallet will confirm that you want to scan and rebuild the database.
-
-![4  Rebuild the Database](https://user-images.githubusercontent.com/29760787/85325888-5dce8400-b49a-11ea-821a-b8563df589e4.jpg)
-
-The wallet will show "Reindexing blocks on disk…" and "Syncing Headers" while it rebuilds the database, this may take several tens of minutes depending on your computer.
-
-After launching, go back to the Stake – Super Staking page and select the "Configure super staker" button (the gear symbol will now be visible) to compete the Super Staker configuration. Click the Custom box to see the default recommendations (shown below) or customize the setup. Click OK to complete the setup.
-
-![5  Super Staker Options](https://user-images.githubusercontent.com/29760787/85325914-658e2880-b49a-11ea-8622-07e5d1207b63.jpg)
-
-The configuration settings are:
-
-* Minimum fee – the minimum fee offered by delegators that the Staker will accept.
-* Minimum UTXO size – this sets the minimum-sized UTXO that will be evaluated for Proof of Stake consensus by the Staker. Over time, the delegated address should accumulate many small block reward UTXOs and it is inefficient to manage all these small amounts (which should be recombined by the delegator). 
-* Delegation list type:
-  *	Accept all – accept any delegation with the minimum fee or more.
-  *	Allow list – only accept delegations from specific addresses. Use this mode if operating a Super Staker only for specific addresses, such as for your coins.
-  *	Exclude list – addresses to exclude from being accepted for staking.
-
-Next, split the UTXOs to valid amounts for committing stakes by the Super Staker. The UTXOs must be a minimum amount of 100 QTUM. On the Super staker page select the split coins button (trident icon) and use the default values or make adjustments, but no UTXOs under 100 QTUM will be used for staking.
-
-![6  Split UTXOs GUI](https://user-images.githubusercontent.com/29760787/85325926-6921af80-b49a-11ea-98d7-332d8f241013.jpg)
-
-You can also split UTXOs with the `splitutxosforaddress` command, which can be used for delegated addresses as well. To split the UTXOs between a minimum and maximum value, enter the command:
-
-`splitutxosforaddress "address" minValue maxValue ( maxOutputs )`
-
-For example, if a wallet held UTXOs of 40, 50, 60, 70, and 800 QTUM, to split these into UTXOs of a minimum 100 and maximum 200 would use the command:
-
-```splitutxosforaddress "qQhm128r4cTuDFSRehLESydnkburYLj9cY" 100 200
-
-{
-  "txid": "197a199c3ac9dd8df574ca77da15c5da31db3f7101e2108638a3b2f94248b9f7",
-  "selected": "1020.00",
-  "splited": "1020.00"
-}
+```
+└─┬─ thisDirectory                          # working directory for PoolPayoutManager
+  ├─── qtumd                                # daemon wallet executable
+  ├─── qtum-cli                             # command line interface executable
+  ├─── PoolPayoutManager.py                 # this Python script
+  ├─── currentpoolshare.csv                 # file with all the delegates and their current pool share
+  ├─── PPMConfig.txt                        # configuration file for PPM
+  │ 
+  ├──┬─ logs                                # log with new file name each day (GMT)
+  │  ├─── PPM_Log_04_Aug_2020.csv
+  │  ├─── PPM_Log_05_Aug_2020.csv
+  │  ├─── PPM_Log_06_Aug_2020.csv
+  │  └─── etc.
+  │
+  └─┬─ poolshare                            # block number pool share files
+    ├─── 651302poolshare.csv                # the "current" pool share after each pool block reward
+    ├─── 651352poolshare.csv
+    ├─── 651357poolshare.csv
+    └─── etc.
 ```
 
-For this example, the total input was 1,020 QTUM, and the split was 9 UTXOs of 100.0 and one of 119.99566, the wallet sending a "transaction to self" and paying a fee of 0.00434 QTUM.
+A note on the terminology for "stake" and "staking". Strictly speaking, the
+"stake" is the quantity of QTUM that your wallet selects to "send" to the 
+blockchain when the wallet is randomly chosen to receive a block
+reward. The wallet will choose one or more UTXOs (previous discrete transactions
+received by the wallet), to commit to the stake. This amount of QTUM is "staked"
+for 501 blocks, and is subtracted from the wallet's ongoing
+staking weight for the 501-block interval. At the end of 501 blocks, the staked
+UTXO matures, and that stake ends.
 
-Previously you could use the `sendmanywithdupes` command but that took significant formatting and operationally you would want to send to a new address. Of course, after either of these commands, the UTXOs must mature for 500 confirmations before they can be used for staking.
+The wallet can be "staking" and decrypted for "staking", but there is only a
+"stake" defined during the block reward period. Just because the wallet is
+staking doesn't mean it currently has a stake. In the code and comments below,
+"stake" refers to the quantity of QTUM "staked" during the block reward period,
+and "staking" refers to the mode of the wallet to evaluate UTXOs fo consensus and
+publish the next block, receiving the block reward.
 
-# Launching Qtum Core as a Super Staker
+For the wallet configured as a super staker the wallet holds a set of UTXOs to commit
+stakes when it finds a kernel (reaches consensus to publish the next block and win
+the block reward) for either delegated address UTXOs or its own UTXOs. 
 
-The above steps show the transition from a default installation Qtum Core wallet to a Super Staker. The wallet may also be initially launched as a Super Staker to shorten the steps. In this case, the initial blockchain sync is accompanied by building the database for address index and log events (as discussed above) so the wallet is all ready for Super Staking.
+While this code began for Qtum Skynet in summer 2017, command responses show
+super staking version 0.19.1 from summer 2020.
 
-The Qtum Core wallet may be launched as a Super Staker with Qtum-Qt using Settings - Options – Main – Enable super staking steps as shown above, or directly through the command line using the `-superstaking=true` parameter (testnet shown here).
+Because of orphan blocks, the PPM looks at blocks "orphanDelay" late, giving the blockchain
+time to resolve forks and valid headers that are not accepted on mainnet. If immediately
+detecting each new block, the staker will accept its new blocks even if they turn out to
+be orphans. This could lead the pool to recognize more block reward payments than the reality
+(because orphan blocks and block rewards are cancelled out). PPM uses delayedBlock and
+delayedOldBlock to manage the delay and various functions work with the delayedBlock.
 
-![7  Linux Launch](https://user-images.githubusercontent.com/29760787/85325943-72128100-b49a-11ea-8d66-cd5a5ea243dd.png) 
+Email alerts may be enabled for various events and hourly updates. The PPM configuration
+file provides two emails addresses and selection between them using "setDomestic" to
+select a domestic or international email. These emails may be sent to an SMS gateway,
+depending on your mobile provider. There is also an array doNotDisturb[] that allows
+hourly stopping of emails (for overnight do not disturb). The email account is from
+Gmail, with setup instructions provided.
 
-This command for the default program directory on Windows would be:
+# To Add
 
-`qtum-qt -testnet -superstaking=true`
+Config file add something about payout interval, day/time, etc.
+Recovery if wallet is locked and then unlocked, recovery from error state
+Have send_email() return a string of the actual email sent (or not if during
+    a do not disturb period) so that the display is correct
+Better recovery for loss of network connection (alerts on low connections now)    
 
-![8  Windows Command Line Launch](https://user-images.githubusercontent.com/29760787/85325959-763e9e80-b49a-11ea-9353-d625f7270d72.jpg) 
+# Logging
 
-When the wallet launches and syncs the blockchain (creating address index and log events) it is all ready to add Super Stakers. Configure a Super Staker and then enable super staking on Settings – Options – Main – set "Enable super staking" and the Super Staker will be ready.
+A log is written as comma separated values (.csv) for easy importing into Excel.
+The log filename is changed daily at 0000 GMT, and has the name PPM_Log_DD_MMM_YYYY.csv.
+The first column of the log file has these reference numbers:
 
-# qtumd Super Staker
+000 Startup and system messages
+100 New block received
+200 End of the day
+300 Payouts
+400 Block reward, staking actions
+500 
+600
+700
+800 Missed block (commented out)
+900 Errors
 
-Any address in a Qtum Core wallet running as a Super Staker may receive delegated addresses and operate as an individual Super Staker. The Desktop GUI wallet Qtum-Qt allows configuration of multiple Super Staker addresses with different fees and minimum UTXO sizes. The daemon/server wallet qtumd runs all its Super Staker addresses using the same fee and minimum UTXO size. If a variation is needed across multiple Super Staker addresses with qtumd, it is possible to set these up with the Qtum-Qt wallet and simply transfer the wallet.dat file to qtumd. 
+Example
+000,Program,start,or,restart,version,2020-08-06
+000,Logging,start,_2232,hours,GMT,06_Aug2020
+000,unix time, date time, block, balance, stake, weight, net weight, del weight, num del,
+     connections, staking, expected Hours, staker, staker reward, delegate, delegate reward,
+     percent, mypool, pool balance, debug extra
+000,Program,start,or,restart,version,2020-08-06
+000,Logging,start,_2243,hours,GMT,06_Aug2020
+000,unix time, date time, block, balance, stake, weight, net weight, del weight, num del,
+     connections, staking, expected Hours, staker, staker reward, delegate, delegate reward,
+     percent, mypool, pool balance, debug extra
+100,1596753827,18:43:47,650817,2487856.7,0.0, 2358532.5,4678088,-129324,57,10, yes,0.0,
+     qYGvbBDDmYWcHXG2omsHoRDUheB4FN5CsR,4.000,qU12Fa5RHM535kSDvywxPjCmbL7gwkQJZ6,0.000,100,no,277.390,prevoutStakeN 1
+100,1596753892,18:44:52,650818,2487856.7,0.0, 2358532.5,4667365,-129324,57,10, yes,0.0,
+     qS3MvbBY8y8xNZx2GVyMEdnQJTCPWoPLUR,4.000,none,0.000,nan,no,277.390,
 
-The following setup for qtumd shows the use of a single Super Staker address.
+# Program Summary
 
-After installing qtumd, launch with the following parameters (testnet shown):
+## Functions
 
-`./qtumd -testnet -superstaking=true`
+send_email()
+    send if doNotDisturb = False, send queued messages
+    else queue the message to send later
 
-Optional parameters may be added to change the default fee (of 10%) and minimum UTXO value (of 100 QTUM), for example as:
+parse_number(), parse_alphanum() and parse_logical()
+    decode various types of text data
 
-`-stakingminfee=12  -stakingminutxovalue=120`
+get_weight_for_delegate()
+    compute the mature weight of a delegate for UTXOs >= minimum size
 
-Once the wallet syncs the blockchain, get an address to send some QTUM. This will be the Super Staker address. Use the command:
+get_delegations_for_staker()
+    get the current delegations for the staker. Called if the pool wins 
+    that block reward. Calls get_weight_for_delegate() to calculate the
+    pool share for each delegate for that block reward.
 
-`./qtum-cli -testnet getnewaddress "legacy"`
+get_delegate_count()
+    lightweight version of get_delegations_for_staker(). Called at 
+    program startup and with each new block to update delegates.
 
-Then send 1,300 QTUM to this address.
+read_current_pool_share_file()
+    reads the current pool share file (the accrued payout for each delegate) ???
+    on startup.
 
-![9  Getnewaddress Getbalance](https://user-images.githubusercontent.com/29760787/85325976-7b9be900-b49a-11ea-9402-2839513e4d2c.png) 
+write_current_pool_share_file()
+    Writes the delegate array with the payout for each delegate based on their
+    weight. Written after each block reward. Also writes the same data as a block
+    number file to the /poolshare subdirectory for archive.
 
-This 1,300 QTUM will arrive in a single UTXO, which must be split for the Super Staker operation. Use the `splitutxosforaddress` command with the default 100 minimum size and 200 maximum size:
+b58encode_int()
+    base 58 encode a hexadecimal integer, used for making a Qtum address
 
-`./qtum-cli -testnet splitutxosforaddress "qdMp2BNpwL6ZmMEQHfLV5wGNVgmPCuzd7d" 100 200`
+pubkey_to_base58()
+    convert a Qtum public key to base 58 address. Used to identify the Qtum
+    address of the delegate winning a block reward.
 
-![10  Split UTXOs for Address qtumd](https://user-images.githubusercontent.com/29760787/85325993-7f2f7000-b49a-11ea-99a9-6a9cfc35db86.png) 
+read_config_file()
+    Read the configuration file PPMConfig.txt
 
-The command response shows that 1,300 QTUM were selected for splitting, in this case splitting into 12 UTXOs which can be seen with the txid on the Explorer.
+payout_with_sendmany()
+    Read out the block number files to sum the poolshare for each delegate (current
+    or past). Format a "sendmany" command (or commands) to pay out the pool.
+    Summed pool shares below a minimum are carried over to the next period.
 
-At this point, the qtumd wallet is ready for Super Staker operation with address qdMp2BNpwL6ZmMEQHfLV5wGNVgmPCuzd7d, and delegations can be monitored using the command:
+log()
+    write to the log file
+    
+get_block()
+    get the blockhash and block data
+    
+unlock_for_staking_only()
+    unlock the wallet for staking only
+    
+unlock_for_sending(localMyWalletPassphrase)
+    fully unlock for sending coins, for payout
+    
+## Program Synopsis
 
-`getdelegationsforstaker "qdMp2BNpwL6ZmMEQHfLV5wGNVgmPCuzd7d"`
+```
+read configuration file
+read currentpoolshare.csv file
+Initialize log file
+make sure qtumd is running
+    if not, send alert and wait for qtumd to start
 
-# Super Staker Operations
-
-The Super Staker must hold UTXOs to commit to stakes for the delegated UTXOs it is staking. The number of UTXOs (of minimum size 100 QTUM) is based on Delegated Weight as a percent of overall Network Weight, and good values are 30 UTXOs for staking 1% of Network Weight, 50 UTXOs for 2.0%, 100 UTXOs for 5% and 160 UTXOs for staking 10% of overall Network Weight. 
-
-Super Stakers should monitor their Wallet weight (UTXO weight minus amount currently staking) and add UTXOs if it drops below several thousand.
-
-Make a backup of the wallet (save the wallet.dat file) after changes in the offline staking configuration such as adding a Super Staker or adding a delegation, because the offline staking configuration is saved in the wallet.dat file. If the backup wallet.dat file is lost the configuration may also be restored with Recovery as shown below.
-
-Delegations to a Super Staker may be checked using the "Delegations…" button on the Super Staker page or with the `getdelegationsforstaker` command.
-
-
-# Restore
-
-Normally delegation and Super Staker configuration are stored in the wallet.dat file. If there are problems with the wallet.dat file the delegation information and super staker information may be recovered using the Restore button on the delegation and Super Staker pages. In this case, the wallet will rescan the "state" contract memory for offline staking transactions for the appropriate addresses.
-
-![11  Restore super stakers](https://user-images.githubusercontent.com/29760787/85325996-822a6080-b49a-11ea-8c4b-3930f9c5e234.jpg)
- 
-***
-
-
-
-
-
-
-
-
-
+main program loop
+    qtum-cli -getinfo 
+    qtum-cli getstakinginfo 
+    make sure qtumd is staking 
+        if not, send alert and wait for staking to be enabled
+    format all the data
+    send out alert if found:
+        new block reward
+        blocks getting stale (no new block in 30 minutes)
+    send an hourly status email
+        send queued messages if noNotDisturb == False
+    for a new block
+        log it
+        check for a skipped block, backup and get it
+    get the staker and delegates
+    if a block reward for delegates of this staker
+        get_delegates_for_staker
+            get_weight_for_delegate
+            identify any new delegates and add to the arrays
+            update the pool share array
+            write the currentpoolshare.csv file
+            write the block number poolshare.csv file
+    wait here, 4 seconds from last block        
+    new block waiting loop
+        qtum-cli getblockchainheight
+        if new block, exit new block waiting loop
+        Check for stale blocks
+        Date and Hours waiting loop, after a new block wait 4, 8, 12... seconds
+            wait 0.3 second
+            check the time, if a new day (UTC)
+                open new log file
+                payout_with_sendmany()
+            check the time, if xx:59:56 set to do hourly email and exit new block waiting loop# Offline Staking
+```
 
