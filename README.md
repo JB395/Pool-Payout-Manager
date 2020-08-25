@@ -115,11 +115,10 @@ Gmail, with setup instructions provided.
 
 # To Add
 
-Config file add something about payout interval, day/time, etc.
-Recovery if wallet is locked and then unlocked, recovery from error state
-Have send_email() return a string of the actual email sent (or not if during
-    a do not disturb period) so that the display is correct
-Better recovery for loss of network connection (alerts on low connections now)    
+* Config file add something about payout interval, day/time, etc.
+* Recovery if wallet is locked and then unlocked, recovery from error state
+* Have send_email() return a string of the actual email sent (or not if during a do not disturb period) so that the display is correct
+* Better recovery for loss of network connection (alerts on low connections now)    
 
 # Logging
 
