@@ -32,7 +32,7 @@ storage (the delegates and their accumulated payout). Data responses from the no
 in the global variable "data", which may then be parsed by the main program or various functions. The principal
 arrays are delegateArray[] which stores the delegates for this super staker, and poolShareArray[] which
 stores the payout accrued by each block reward for the delegate. Delegate payouts must reach a minimum of 
-0.001 QTUM, (dconfigurable) or else they are carried over to accrue in the next period.
+0.001 QTUM, (configurable) or else they are carried over to accrue in the next period.
 
 # qtumd launch parameters (pool)
 ```
