@@ -138,6 +138,7 @@ The first column of the log file has these reference numbers:
 900 Errors
 
 Example
+```
 000,Program,start,or,restart,version,2020-08-06
 000,Logging,start,_2232,hours,GMT,06_Aug2020
 000,unix time, date time, block, balance, stake, weight, net weight, del weight, num del,
@@ -152,7 +153,7 @@ Example
      qYGvbBDDmYWcHXG2omsHoRDUheB4FN5CsR,4.000,qU12Fa5RHM535kSDvywxPjCmbL7gwkQJZ6,0.000,100,no,277.390,prevoutStakeN 1
 100,1596753892,18:44:52,650818,2487856.7,0.0, 2358532.5,4667365,-129324,57,10, yes,0.0,
      qS3MvbBY8y8xNZx2GVyMEdnQJTCPWoPLUR,4.000,none,0.000,nan,no,277.390,
-     
+```  
 # Console
 
 PPM prints to a local console for delayed blocks and messages.
