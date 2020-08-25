@@ -155,53 +155,50 @@ PPM prints to a local console for delayed blocks and messages.
   * send if doNotDisturb = False, send queued messages
   * else queue the message to send later
 
-parse_number(), parse_alphanum() and parse_logical()
-    decode various types of text data
+* parse_number(), parse_alphanum() and parse_logical()
+  *  decode various types of text data
 
-get_weight_for_delegate()
-    compute the mature weight of a delegate for UTXOs >= minimum size
+* get_weight_for_delegate()
+  * compute the mature weight of a delegate for UTXOs >= minimum size
 
-get_delegations_for_staker()
-    get the current delegations for the staker. Called if the pool wins 
-    that block reward. Calls get_weight_for_delegate() to calculate the
+* get_delegations_for_staker()
+  * get the current delegations for the staker. 
+  * Called if the pool wins that block reward. Calls get_weight_for_delegate() to calculate the
     pool share for each delegate for that block reward.
 
-get_delegate_count()
-    lightweight version of get_delegations_for_staker(). Called at 
-    program startup and with each new block to update delegates.
+* get_delegate_count()
+  * lightweight version of get_delegations_for_staker(). 
+  * Called at program startup and with each new block to update delegates.
 
-read_current_pool_share_file()
-    reads the current pool share file (the accrued payout for each delegate) ???
-    on startup.
+* read_current_pool_share_file()
+  * reads the current pool share file (the accrued payout for each delegate) on startup.
 
-write_current_pool_share_file()
-    Writes the delegate array with the payout for each delegate based on their
-    weight. Written after each block reward. Also writes the same data as a block
-    number file to the /poolshare subdirectory for archive.
+* write_current_pool_share_file()
+  * Writes the delegate array with the payout for each delegate based on their weight. 
+  * Written after each block reward. Also writes the same data as a block number file to the /poolshare subdirectory for archive.
 
-b58encode_int()
-    base 58 encode a hexadecimal integer, used for making a Qtum address
+* b58encode_int()
+  * base 58 encode a hexadecimal integer, used for making a Qtum address
 
-pubkey_to_base58()
-    convert a Qtum public key to base 58 address. Used to identify the Qtum
-    address of the delegate winning a block reward.
+* pubkey_to_base58()
+  * convert a Qtum public key to base 58 address. Used to identify the Qtum address of the delegate winning a block reward.
 
-read_config_file()
-    Read the configuration file PPMConfig.txt
+* read_config_file()
+  * Read the configuration file PPMConfig.txt
 
-payout_with_sendmany()
-    Read out the block number files to sum the poolshare for each delegate (current
-    or past). Format a "sendmany" command (or commands) to pay out the pool.
-    Summed pool shares below a minimum are carried over to the next period.
+* payout_with_sendmany()
+  * Read out the block number files to sum the poolshare for each delegate (current or past). 
+  * Format a "sendmany" command (or commands) to pay out the pool.
+  * Summed pool shares below a minimum are carried over to the next period.
 
-log()
-    write to the log file
+* log()
+  * write to the log file
     
-get_block()
-    get the blockhash and block data
+* get_block()
+  * get the blockhash and block data
     
-unlock_for_staking_only()
-    unlock the wallet for staking only
+* unlock_for_staking_only()
+  * unlock the wallet for staking only
     
 * unlock_for_sending()
   * fully unlock for sending coins, for payout
