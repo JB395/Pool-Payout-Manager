@@ -53,7 +53,7 @@ in the same directory/folder, and both qtumd and PPM run from that directory.
 PPM will write the log files and block number pool share files to subdirectories
 as shown.
 
-# Directory configuration
+## Directory configuration
 
 ```
 └─┬─ thisDirectory                          # working directory for PoolPayoutManager
