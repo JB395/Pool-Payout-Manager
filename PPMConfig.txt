@@ -1,0 +1,28 @@
+# PPMConfig.txt
+#
+# configuration file for PoolPayoutManager.py
+# Last change 2020-08-25
+#
+
+"hostName": LD18,                              		# used to label this machine, for multi-machine environments
+"sendEmail": true,                              	# send a text when get reward, or in errors
+"sendHourlyEmail": true,                        	# send a text on the hour with status
+"setDomestic": true,                          	 	# send the text to a domestic or international mobile
+"domesticAddress": 9876543210txt.att.net,      		# email for domestic texts
+"internationalAddress": 87654321@starhubenterprisemessaging.com, # email for international texts
+"enableLogging": true,                          	# enable logging to a local file
+"emailAddress": mygmail@gmail.com,               	# email address for sending
+"emailUsername": mygmail,		        	# user name for email login
+"emailPassword": apgzvyhmeneljjlr,              	# password for email login
+"UTCTimeOffset": 8,		        		# local time zone offset from UTC
+"myMinerAddress": QPooLGGp2FodAN1PpqvB7iLNK7kD3gSeko, 	# Qtum address for my miner
+"requiredFee": 100,					# required delegation fee, 100 for a pool
+"poolFee": 12, 	                                        # fee the pool charges
+"minimumUTXOSize": 25,					# minimum UTXO size, must match super staker setup
+							# used to calculate delegate weight
+"intsatsSendmanyMinimum": 100000,			# minimum pool share payout size, else carry over to next
+							# payment period. Minimum for Qtum Core is 100000 Sats
+"isMainnet": true,					# true if on mainnet, false if on testnet
+"isLinux": true,                                        # set to true for Linux, false for Windows
+"forceTest": false,					# force staking = True to override immature coins of zero balance (for testing)
+"catchupMode": true,					# true: process all blocks after currentpoolshare file, false: from current
