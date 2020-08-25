@@ -10,8 +10,10 @@ MIT License
 
 2020-07-05T17:56:14Z : You need to rebuild the database using -reindex
 to change -addrindex.
+
 Please restart with -reindex or -reindex-chainstate to recover.
-: You need to rebuild the database using -reindex to change -addrindex.
+
+You need to rebuild the database using -reindex to change -addrindex.
 Please restart with -reindex or -reindex-chainstate to recover.
 
 # About PPM
