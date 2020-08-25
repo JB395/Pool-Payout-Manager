@@ -6,16 +6,6 @@ Proof of Concept beta software, use at your own risk
 
 MIT License
 
-# Error Message
-
-2020-07-05T17:56:14Z : You need to rebuild the database using -reindex
-to change -addrindex.
-
-Please restart with -reindex or -reindex-chainstate to recover.
-
-You need to rebuild the database using -reindex to change -addrindex.
-Please restart with -reindex or -reindex-chainstate to recover.
-
 # About PPM
 
 PPM is a Proof of Concept program to monitor qtumd operating as a 100% fee super staker
@@ -259,4 +249,13 @@ main program loop
                 payout_with_sendmany()
             check the time, if xx:59:56 set to do hourly email and exit new block waiting loop# Offline Staking
 ```
+# Error Message
+
+2020-07-05T17:56:14Z : You need to rebuild the database using -reindex
+to change -addrindex.
+
+Please restart with -reindex or -reindex-chainstate to recover.
+
+You need to rebuild the database using -reindex to change -addrindex.
+Please restart with -reindex or -reindex-chainstate to recover.
 
