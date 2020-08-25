@@ -101,7 +101,7 @@ file provides two emails addresses and selection between them using "setDomestic
 select a domestic or international email. These emails may be sent to an SMS gateway,
 depending on your mobile provider. There is also an array doNotDisturb[] that allows
 hourly stopping of emails (for overnight do not disturb). The email account is from
-Gmail, with setup instructions provided.
+Gmail, with setup instructions given in the file "Gmail Device Password Setup".
 
 # To Add
 
