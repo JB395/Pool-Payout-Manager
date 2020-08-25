@@ -153,6 +153,12 @@ Example
      qYGvbBDDmYWcHXG2omsHoRDUheB4FN5CsR,4.000,qU12Fa5RHM535kSDvywxPjCmbL7gwkQJZ6,0.000,100,no,277.390,prevoutStakeN 1
 100,1596753892,18:44:52,650818,2487856.7,0.0, 2358532.5,4667365,-129324,57,10, yes,0.0,
      qS3MvbBY8y8xNZx2GVyMEdnQJTCPWoPLUR,4.000,none,0.000,nan,no,277.390,
+     
+# Console
+
+PPM prints to a local console for delayed blocks and messages.
+
+![Console](https://user-images.githubusercontent.com/29760787/91210410-2e770600-e6db-11ea-8021-16d6cbb3770c.png)
 
 # Program Summary
 
