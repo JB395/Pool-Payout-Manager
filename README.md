@@ -1,8 +1,7 @@
-***
-PoolPayoutManager.py (PPM)
+# PoolPayoutManager.py (PPM)
 
 Copyright (c) 2020 Qtum Chain Foundation
-Beta software, use at your own risk
+Proof of Concept beta software, use at your own risk
 MIT License
 
 # Error Message
@@ -32,9 +31,9 @@ stores the payout accrued by each block reward for the delegate. Delegate payout
 0.001 QTUM, (dconfigurable) or else they are carried over to accrue in the next period.
 
 # qtumd launch parameters (pool)
-
+```
 ./qtumd -testnet -superstaking -stakingminfee=100 -stakingminutxovalue=25 -txindex -reservebalance=1500
-
+```
 # Path and folders
 
 qtumd and PPM do not require any path setup. These files should be located
