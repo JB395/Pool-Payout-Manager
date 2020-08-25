@@ -1,7 +1,9 @@
 # PoolPayoutManager.py (PPM)
 
 Copyright (c) 2020 Qtum Chain Foundation
+
 Proof of Concept beta software, use at your own risk
+
 MIT License
 
 # Error Message
