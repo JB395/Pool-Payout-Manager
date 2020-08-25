@@ -34,6 +34,14 @@ arrays are delegateArray[] which stores the delegates for this super staker, and
 stores the payout accrued by each block reward for the delegate. Delegate payouts must reach a minimum of 
 0.001 QTUM, (configurable) or else they are carried over to accrue in the next period.
 
+# Pay Per Mature UTXO (PPMU)
+
+Delegated addresses accrue payout for each pool block reward based on their address’s mature UTXOs (weight)
+of minimum size accepted by the pool, divided by the overall pool weight for that block reward.
+Individual pool members may add or remove UTXOs from their delegated address at any time, join
+or leave the pool at any time, and all pool members are be treated fairly according to the mature
+UTXOs staking for each block.
+
 # qtumd launch parameters (pool)
 ```
 ./qtumd -testnet -superstaking -stakingminfee=100 -stakingminutxovalue=25 -txindex -reservebalance=1500
