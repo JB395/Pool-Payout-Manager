@@ -146,9 +146,6 @@ Example
      percent, mypool, pool balance, debug extra
 000,Program,start,or,restart,version,2020-08-06
 000,Logging,start,_2243,hours,GMT,06_Aug2020
-000,unix time, date time, block, balance, stake, weight, net weight, del weight, num del,
-     connections, staking, expected Hours, staker, staker reward, delegate, delegate reward,
-     percent, mypool, pool balance, debug extra
 100,1596753827,18:43:47,650817,2487856.7,0.0, 2358532.5,4678088,-129324,57,10, yes,0.0,
      qYGvbBDDmYWcHXG2omsHoRDUheB4FN5CsR,4.000,qU12Fa5RHM535kSDvywxPjCmbL7gwkQJZ6,0.000,100,no,277.390,prevoutStakeN 1
 100,1596753892,18:44:52,650818,2487856.7,0.0, 2358532.5,4667365,-129324,57,10, yes,0.0,
