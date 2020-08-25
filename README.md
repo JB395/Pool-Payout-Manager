@@ -151,9 +151,9 @@ PPM prints to a local console for delayed blocks and messages.
 
 ## Functions
 
-send_email()
-    send if doNotDisturb = False, send queued messages
-    else queue the message to send later
+* send_email()
+  * send if doNotDisturb = False, send queued messages
+  * else queue the message to send later
 
 parse_number(), parse_alphanum() and parse_logical()
     decode various types of text data
@@ -203,8 +203,8 @@ get_block()
 unlock_for_staking_only()
     unlock the wallet for staking only
     
-unlock_for_sending(localMyWalletPassphrase)
-    fully unlock for sending coins, for payout
+* unlock_for_sending()
+  * fully unlock for sending coins, for payout
     
 ## Program Synopsis
 
