@@ -1,6 +1,6 @@
 # PoolPayoutManager.py (PPM)
 
-Copyright (c) 2020 Jackson Belove
+Copyright (c) 2021 Jackson Belove
 
 Proof of Concept beta software, use at your own risk
 
@@ -79,7 +79,7 @@ The wallet can be "staking" and decrypted for "staking", but there is only a
 "stake" defined during the block reward period. Just because the wallet is
 staking doesn't mean it currently has a stake. In the code and comments below,
 "stake" refers to the quantity of QTUM "staked" during the block reward period,
-and "staking" refers to the mode of the wallet to evaluate UTXOs fo consensus and
+and "staking" refers to the mode of the wallet to evaluate UTXOs for consensus and
 publish the next block, receiving the block reward.
 
 For the wallet configured as a super staker the wallet holds a set of UTXOs to commit
