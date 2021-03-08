@@ -1,4 +1,4 @@
-﻿version = "2021-03-05"
+﻿version = "2021-03-07"
 '''
 PoolPayoutManager.py (PPM)
 
@@ -2084,7 +2084,7 @@ def payout_with_sendmany(localFee):
 
             print("delegates paid ", sendmanyCount, "subtotal paid ", totalPayout)
             
-            intsatspoolRevenue += (intsatsPoolBalance - totalPayout)     # the pool fee
+            intsatspoolRevenue += (intsatsPoolBalance - totalPayout * 100000000)     # the pool fee
 
     unlock_for_staking_only(myWalletPassphrase)
     print("unlock for staking only")
@@ -2137,7 +2137,7 @@ def payout_with_sendmany(localFee):
 
     # log results from all the sendmanys
 
-    print("Payout completed. sendmanys sent", sendmanysSent, "number delegates paid", totalNumPayouts, "total paid", "{:.8f}".format(totalPayout), "revenue", "{:.8f}".format(intsatspoolRevenue))
+    print("Payout completed. sendmanys sent", sendmanysSent, "number delegates paid", totalNumPayouts, "total paid", "{:.8f}".format(totalPayout), "revenue", "{:.8f}".format(intsatspoolRevenue / 100000000))
 
     # # 300,total,sendmanys,1,numDelegatesPaid,63,totalPaid,211.20079246,intsatspoolRevenue,26000089788.799206
 
@@ -2148,7 +2148,7 @@ def payout_with_sendmany(localFee):
             ",totalPaid," + str("{:.8f}".format(totalPayout)) + ",intsatspoolRevenue," + str(intsatspoolRevenue))
 
     if sendEmail == True:
-        tempMessage =  str(totalNumPayouts) + "paid " + str("{:.2f}".format(totalPayout)) + "revenue " + str("{:.2f}".format(intsatspoolRevenue))
+        tempMessage =  str(totalNumPayouts) + "paid " + str("{:.2f}".format(totalPayout)) + "revenue " + str("{:.2f}".format(intsatspoolRevenue / 100000000))
         tempSubject = "." + hostName + " stk " + stakeWithCommas                
         send_email(tempSubject, tempMessage)
         
@@ -3859,7 +3859,7 @@ while True:
     if sendEmailForNewHour == True:
         
         if sendHourlyEmail == True:          # okay to send hourly status email
-            tempMessage =  " bal " + balanceWithCommas + " blk " + blockWithCommas + " mwt " + weightWithCommas + " nnwt " +  stakingForEmail
+            tempMessage =  " bal " + balanceWithCommas + " blk " + blockWithCommas + " mwt " + weightWithCommas + " dwt " + delegatedWeightFormatted + " stking " +  stakingForEmail
             tempSubject = "." + hostName + " stk " + stakeWithCommas
                           
             if sendEmail == True:
