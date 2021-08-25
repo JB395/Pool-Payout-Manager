@@ -1,4 +1,4 @@
-﻿version = "2021-03-07"
+﻿version = "2021-08-24"
 '''
 PoolPayoutManager.py (PPM)
 
@@ -134,6 +134,7 @@ Please restart with -reindex or -reindex-chainstate to recover.
 
 Revisions
 
+2021-08-24 Changed maturity to 2000
 2020-09-17 Renamed log files YYYY_MMM_DD so they list sequentially
 2020-09-16 Bug fixes, divide by zero check, currentpoolshare file to .txt
 2020-09-14 Adding 4 trys for all CLI calls
@@ -358,7 +359,7 @@ strBlockTime = ""           # time read from block
 rightSideExtra = ''     # extra data to print on right side of row for debugging
 stakerReward = 0.0          # to get started
 isPoolBlockReward = False   # to get started
-maturity = 500              # confirmations for maturity, used by get_weight_for_delegate()
+maturity = 2000             # confirmations for maturity, used by get_weight_for_delegate()
 intsatsPoolBalance = 0      # block reward balance of pool, integer Satoshis
 delegateCount = 0           # on startup, set in read_current_pool_share_file()
 intsatsSendmanyMinimum = -1 # on startup, set in the configuration file
